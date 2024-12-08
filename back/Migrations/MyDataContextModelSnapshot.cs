@@ -44,7 +44,7 @@ namespace back.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Feedback");
+                    b.ToTable("Feedback", (string)null);
                 });
 
             modelBuilder.Entity("back.Models.Tour", b =>
@@ -90,7 +90,7 @@ namespace back.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tours");
+                    b.ToTable("Tours", (string)null);
                 });
 
             modelBuilder.Entity("back.Models.User", b =>
@@ -123,7 +123,7 @@ namespace back.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 #pragma warning restore 612, 618
         }

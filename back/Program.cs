@@ -6,53 +6,41 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Конфигурация подключения к базе данных
 builder.Services.AddDbContext<MyDataContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 40))));
 
+// Добавление поддержки аутентификации JWT
+var secretKey = "your-very-strong-and-secure-key-1234567890123456"; // Используется в AuthController
+var key = Encoding.UTF8.GetBytes(secretKey);
 
-
-
-void ConfigureServices(IServiceCollection services)
-{
-    var key = Encoding.UTF8.GetBytes("your-very-strong-and-secure-key-1234567890123456");
-
-    services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false, // Настроить при необходимости
-            ValidateAudience = false, // Настроить при необходимости
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key)
+            ValidateIssuer = false, // Не проверяем издателя (можно настроить на true, если есть конкретный издатель)
+            ValidateAudience = false, // Не проверяем аудиторию (можно настроить на true, если есть конкретная аудитория)
+            ValidateLifetime = true, // Проверяем срок действия токена
+            ValidateIssuerSigningKey = true, // Проверяем подпись токена
+            IssuerSigningKey = new SymmetricSecurityKey(key) // Ключ для подписи
         };
     });
 
-    services.AddControllers();
-}
-
-
-
-
-// Add services to the container.
+// Добавление контроллеров
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-
+// Настройка обработки запросов и статических файлов
 app.UseDefaultFiles(); // Для обработки index.html как стартовой страницы
 app.UseStaticFiles();  // Для отдачи статических файлов
 
+// Подключение Swagger (документация API)
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -60,10 +48,15 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "swagger"; // Swagger будет доступен по адресу /swagger
 });
 
-
+// Включение HTTPS перенаправления
 app.UseHttpsRedirection();
+
+// Подключение аутентификации и авторизации
+app.UseAuthentication(); // Добавлено для обработки JWT-токенов
 app.UseAuthorization();
+
+// Маршрутизация контроллеров
 app.MapControllers();
+
+// Запуск приложения
 app.Run();
-
-

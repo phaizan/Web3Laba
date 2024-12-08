@@ -72,6 +72,39 @@ public class AuthController : ControllerBase
         });
     }
 
+    [HttpGet("user")]
+    public IActionResult GetUserInfo()
+    {
+        // Извлекаем идентификатор пользователя из токена
+        var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "id");
+        if (userIdClaim == null)
+        {
+            return Unauthorized("Токен недействителен.");
+        }
+
+        if (!int.TryParse(userIdClaim.Value, out var userId))
+        {
+            return BadRequest("Некорректный токен.");
+        }
+
+        // Ищем пользователя в базе данных
+        var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+        if (user == null)
+        {
+            return NotFound("Пользователь не найден.");
+        }
+
+        // Возвращаем информацию о пользователе
+        return Ok(new
+        {
+            firstName = user.Name,
+            lastName = user.Surname,
+            email = user.Email
+        });
+    }
+
+
+
     private string GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
@@ -105,22 +138,5 @@ public class AuthController : ControllerBase
     {
         return hashedPassword == HashPassword(enteredPassword);
     }
-
-    [HttpPost("refresh")]
-    public IActionResult Refresh([FromBody] string refreshToken)
-    {
-        var storedToken = _context.RefreshTokens.FirstOrDefault(rt => rt.Token == refreshToken);
-
-        if (storedToken == null || storedToken.ExpiryDate < DateTime.UtcNow)
-        {
-            return Unauthorized("Недействительный или истекший Refresh Token.");
-        }
-
-        var user = _context.Users.FirstOrDefault(u => u.Id == storedToken.UserId);
-
-        var newJwtToken = GenerateJwtToken(user);
-        return Ok(new { token = newJwtToken });
-    }
-
 
 }

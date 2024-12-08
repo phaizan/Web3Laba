@@ -33,28 +33,38 @@
             </form>
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
-                    const token = localStorage.getItem('jwt');
                     const userInfoElement = document.getElementById('user-info');
                     const loginForm = document.getElementById('login-form');
 
-                    if (token) {
-                        fetch('http://localhost:5047/api/auth/user', {
-                            headers: {
-                                'Authorization': `Bearer ${token}`
-                            }
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data && data.lastName && data.firstName) {
-                                    userInfoElement.innerHTML = `Добро пожаловать, ${data.lastName} ${data.firstName[0]}.`;
-                                    loginForm.style.display = 'none';
-                                }
-                            })
-                            .catch(() => {
-                                userInfoElement.innerHTML = 'Ошибка авторизации. Пожалуйста, войдите заново.';
-                            });
-                    }
+                    // Получение заголовков с токеном
+                    const getHeadersWithToken = () => {
+                        const token = localStorage.getItem('jwt');
+                        return token ? { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+                    };
 
+                    // Проверка токена и получение информации о пользователе
+                    const checkTokenAndFetchUser = async () => {
+                        const headers = getHeadersWithToken();
+                        if (headers.Authorization) {
+                            try {
+                                const response = await fetch('http://localhost:5047/api/auth/user', { headers });
+                                if (response.ok) {
+                                    const data = await response.json();
+                                    if (data && data.lastName && data.firstName) {
+                                        userInfoElement.innerHTML = `Добро пожаловать, ${data.lastName} ${data.firstName[0]}.`;
+                                        loginForm.style.display = 'none';
+                                    }
+                                } else {
+                                    localStorage.removeItem('jwt'); // Удаляем токен, если он больше недействителен
+                                    userInfoElement.innerHTML = 'Ошибка авторизации. Пожалуйста, войдите заново.';
+                                }
+                            } catch {
+                                userInfoElement.innerHTML = 'Не удалось загрузить информацию о пользователе.';
+                            }
+                        }
+                    };
+
+                    // Обработчик входа
                     document.getElementById('login-button').addEventListener('click', async () => {
                         const email = document.getElementById('email').value.trim();
                         const password = document.getElementById('password').value.trim();
@@ -73,7 +83,7 @@
 
                             if (response.ok) {
                                 const { token, user } = await response.json();
-                                localStorage.setItem('jwt', token);
+                                localStorage.setItem('jwt', token); // Сохраняем токен
                                 userInfoElement.innerHTML = `Добро пожаловать, ${user.lastName} ${user.firstName[0]}.`;
                                 loginForm.style.display = 'none';
                             } else {
@@ -84,8 +94,12 @@
                             alert("Не удалось подключиться к серверу.");
                         }
                     });
+
+                    // Выполнение проверки токена при загрузке
+                    checkTokenAndFetchUser();
                 });
             </script>
+
 
 
         </div>
