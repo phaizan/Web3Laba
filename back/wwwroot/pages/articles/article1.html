@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>На чем лучше добираться на экскурсию в Нижний Новгород!? - Золотая Середина</title>
+    <link href="../../styles/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../../index.html"><img src="../../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='../registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../../index.html">Главная</a></li>
+            <li><a href="../about.html">О нас</a></li>
+            <li><a href="../tours.html">Туры</a></li>
+            <li><a href="../contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <aside class="sidebar">
+                <a href="../buying.html">Как купить</a>
+                <a href="../1dayex.html">Однодневные экскурсии</a>
+                <a href="../articles.html">Статьи</a>
+                <a href="../feedback.html">Обратная связь</a>
+            
+                <!-- Поле поиска -->
+                <form class="search-form" onsubmit="highlightText(event)">
+                    <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                    <button type="submit" class="button">Поиск</button>
+                </form>
+            
+            </aside>
+            <section class="content">
+                <h2 style="text-align: center;">На чем лучше добираться на экскурсию в Нижний Новгород!?</h2>
+                <img src="../../images/artlogo.jpg" style="width: 200px; padding: 40px; float: left; margin-right: 20px;">
+                <p>1. Ночной поезд. Едет в среднем 6 часов. Плацкарт и купе в среднем от 1500 до 6500 р. Причем и купе можно урвать за 2500 р. И СВ за 3500 р.</p>
+                <p>Но смысл? Если можно добраться с комфортом за 4 часа!</p>
+                <p>2. Сапсан, Стриж, Ласточка - что выбрать? Время в пути примерно одинаковое, цена во всех динамическая, меняется в зависимости от спроса и близости даты. Цена примерно тоже одинаковая - Ласточка самая дешевая, Стриж (наша разработка) и Сапсан (импортный поезд, но такой же, как в Питер ездит).</p>
+                <p>Ласточку вы можете посмотреть прокатившись на ней по МКЦ в Москве (новая ветка метро). Из жирных минусов - целых 5 кресел в ряд и один туалет на три вагона с гигантскими очередями. Из плюсов самая низкая цена 1,5 т.р.</p>
+                <p>Уже разработали Ласточку с учетом всех ошибок с 4 креслами в ряд и туалетом в каждом вагоне, но пока еще не выпустили на рейсы. Ждем!</p>
+                <p>В Стриже вагоны с 4 креслами в ряд примерно за 2,5 т.р. И с тремя за 3,5 т.р. И СВ - купе, где можно поспать - 6,5 т.р. Розеток в базовом тарифе у сидений нет, показывают старые советские фильмы на общих экранах - дают одноразовые наушники. Носят за доплату чай и кофе с шоколадками и бутерами. Туалет в каждом вагоне без очередей. В повышенном классе комфорта - есть розетка, входит в стоимость обед, бутылочка воды и тапочки. В СВ есть даже душ.</p>
+                <p>Почему так долго? В Питер ведь тоже 4 часа на Сапсане! Рельсы по этому направлению еще не реновировали, потихоньку переделывают. Процесс долгий, но в будущем время в пути сократится и можно будет без пробок ехать.</p>
+                <p>3. На автомобиле или автобусе с учетом всех пробок - 6-7 часов от Москвы до Нижнего.</p>
+                <p>4. На самолете - в основном летают из Домодедово и Шереметьево. По цене 7-8 т.р. за перелет туда-обратно. В Нижнем Новгороде аэропорт в 20 км от центра города, что примерно полчаса на такси.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+    <div id="notification"></div>
+
+    <script>
+        function highlightText(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const searchTerm = document.getElementById('search-input').value;
+            const content = document.querySelector('.content'); // Получаем элемент с контентом
+            const notification = document.getElementById('notification'); // Элемент для уведомления
+    
+            // Сначала убираем предыдущие выделения
+            clearHighlights(content);
+            notification.classList.remove('show'); // Скрываем уведомление
+    
+            // Теперь выделяем новый текст
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
+                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
+    
+                if (!matches) {
+                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
+                    // Показываем уведомление
+                    notification.classList.add('show'); // Добавляем класс для отображения
+                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
+                    setTimeout(() => {
+                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
+                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
+                    }, 2000); // Скрываем уведомление через 4 секунды
+                }
+    
+                // Если совпадения есть, просто выделяем текст
+                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+    
+        function clearHighlights(container) {
+            // Удаляем выделение, если оно есть
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+        }
+    </script>
+    
+</body>
+</html>

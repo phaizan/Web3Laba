@@ -1,0 +1,149 @@
+/* styles/registration.css */
+*{
+    font-family: 'Montserrat', sans-serif;
+
+}
+/* Основные стили */
+body {
+    background-color: #e8f5e9; /* Светло-зеленый фон */
+    font-family: 'Arial', sans-serif;
+    color: #2e7d32; /* Темно-зеленый текст */
+    margin: 0; /* Убираем отступы у body */
+    padding: 0; /* Убираем внутренние отступы у body */
+}
+
+header {
+    background-color: #103813; /* Темный зеленый для заголовка */
+    color: #388e3c;
+    padding: 5px 0; /* Вертикальные отступы */
+}
+
+header .container {
+    display: flex; /* Используем Flexbox для выравнивания */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: space-between; /* Разделяем логотип и заголовок */
+    max-width: 1400px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрируем контейнер по горизонтали */
+}
+
+header .logo {
+    margin-left: 15px; /* Отступ слева для логотипа */
+}
+
+header .logo img {
+    width: 200px; /* Увеличиваем ширину логотипа */
+}
+
+h1 {
+    flex-grow: 1; /* Позволяет заголовку занять оставшееся пространство */
+    text-align: center; /* Выравнивание текста по левому краю */
+    margin: 0; /* Убираем отступы у заголовка */
+    padding-right: 217px; /* Добавляем отступ слева для смещения влево */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 74.45vh; /* Высота контейнера для центрирования */
+}
+
+.registration-form {
+    background-color: #c5e1a5; /* Светлый фон для формы */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ширина формы */
+    max-width: 90%; /* Убедимся, что форма не выходит за пределы экрана на мобильных устройствах */
+}
+
+.registration-form h2 {
+    text-align: center;
+    color: #2e7d32; /* Цвет заголовка формы */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Стили для полей email и паролей */
+input[type="email"],
+input[type="password"] {
+    width: calc(100% - 22px); /* Уменьшаем ширину полей */
+    padding: 10px;
+    margin-bottom: 15px; /* Отступ снизу */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Стили для поля выбора города */
+select {
+    width: 100%; /* Ширина поля выбора города */
+    padding: 10px;
+    margin-bottom: 15px; /* Отступ снизу */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Стили для кнопок */
+button {
+    width: 100%; /* Ширина кнопки */
+    padding: 10px;
+    background-color: #2e7d32; /* Темно-зеленый для кнопки */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none; /* Убираем стандартные границы кнопки */
+    border-radius: 4px; /* Скругление углов кнопки */
+    margin-top: 10px; /* Отступ сверху для кнопок */
+}
+
+button:hover {
+    background-color: #388e3c; /* Более светлый зеленый при наведении */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1b5e20; /* Темный зеленый для подвала */
+    color: white;
+}
+
+/* Стили для формы обратной связи */
+.feedback-form {
+    background-color: #c5e1a5; /* Светлый фон для формы */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ширина формы */
+    max-width: 90%; /* Убедимся, что форма не выходит за пределы экрана на мобильных устройствах */
+    margin: 0 auto; /* Центрируем форму */
+}
+
+.feedback-form h2 {
+    text-align: center;
+    color: #2e7d32; /* Цвет заголовка формы */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Стили для полей имени, email и темы */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: calc(100% - 22px); /* Ширина полей */
+    padding: 10px;
+    margin-bottom: 15px; /* Отступ снизу */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Стили для текстовой области */
+textarea {
+    resize: vertical; /* Позволяет изменять высоту */
+}

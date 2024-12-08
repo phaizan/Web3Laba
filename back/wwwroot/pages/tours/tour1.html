@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ru" style="width:auto;">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тур на 4 дня в Калмыкию! На поезде из Москвы! - Золотая Середина</title>
+    <link href="../../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+
+
+        .tour-content {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 30px;
+        }
+
+        .tour-content img {
+            width: 430px;
+            height: 230px;
+            margin-right: 40px; 
+            margin-left:20px;
+            border-radius: 10px;
+        }
+
+        .tour-info {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+        }
+
+        .tour-info h2 {
+            margin-bottom: 15px;
+        }
+
+        .tour-info p {
+            margin: 8px 0; /* Уменьшены отступы между параграфами */
+            line-height: 1; /* Уменьшено расстояние между строками */
+        }
+
+        .tour-info .book-button {
+            display: inline-block;
+            padding: 10px 10px;
+            background-color: #f4b841;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .book-button {
+            display: inline-block;
+            padding: 10px 10px;
+            width: 150px;
+            background-color: #f4b841;
+            color: white;
+            text-align:center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+
+        .tour-info .book-button:hover {
+            background-color: #d4952f;
+        }
+
+        .tour-main-text {
+            margin-top: 40px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: flex;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../../index.html"><img src="../../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='../registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../../index.html">Главная</a></li>
+            <li><a href="../about.html">О нас</a></li>
+            <li><a href="../tours.html">Туры</a></li>
+            <li><a href="../contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <a href="../buying.html">Как купить</a>
+                <a href="../1dayex.html">Однодневные экскурсии</a>
+                <a href="../articles.html">Статьи</a>
+                <a href="../feedback.html">Обратная связь</a>
+
+                <!-- Search form -->
+                <form class="search-form">
+                    <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                    <button type="submit" class="button">Поиск</button>
+                </form>
+            </aside>
+
+            <!-- Tour content -->
+            <section class="content">
+                <h2 style="text-align: center; padding-bottom: 10px;" id="tour-title">
+                    Загрузка тура...
+                </h2>
+
+                <!-- Главный блок с изображением и характеристиками -->
+                <div class="tour-content">
+                    <div class="gallery-container">
+                        <img id="tour-image" src="../../images/tou.jpg" alt="Тур" class="tour-image">
+                    </div>
+                    <div class="tour-info">
+                        <p><strong>Город отправления:</strong> <span id="tour-departure">...</span></p>
+                        <p><strong>Дата отправления:</strong> <span id="tour-start-date">...</span></p>
+                        <p><strong>Дата прибытия:</strong> <span id="tour-end-date">...</span></p>
+                        <p><strong>Свободных мест:</strong> <span id="tour-places">...</span></p>
+                        <p><strong>Цена:</strong> <span id="tour-price">...</span> руб.</p>
+                        <a href="#" class="book-button">Забронировать</a>
+                    </div>
+                </div>
+
+                <!-- Блок с полным описанием тура -->
+                <div class="tour-main-text">
+                    <h2>Тур понравится тем, кто не любит долгие переезды и ценит свое время</h2>
+                    <p><strong>Гарантия выезда на каждую дату!</strong></p>
+
+                    <h3>1 день (вторник)</h3>
+                    <p>16:50 - Отправление из Москвы в Сортавалу (ночной поезд).</p>
+
+                    <h3>2 день (среда)</h3>
+                    <p>8:20 - 9:30 Прибытие в г. Сортавала на поезде из Москвы.</p>
+                    <p>10:20 - Пересадка в городе Сортавала на ретропоезд.</p>
+                    <p>
+                        <em>
+                            В выходные и праздничные дни билеты на ретропоезд желательно приобретать заранее на сайте РЖД
+                            (стоимость билетов около 1000 р.), так как их быстро раскупают. Если на ваши даты уже нет билетов
+                            или вы не хотите ехать на ретропоезде, на станции Сортавала вас встретит наш гид и довезет до
+                            горного парка «Рускеала» на автобусе.
+                        </em>
+                    </p>
+
+                    <h4>Обзорная экскурсия в Горный парк "Рускеала"</h4>
+                    <p>
+                        Это главная круглогодичная достопримечательность Карелии. Территория горного парка огромна. Центром
+                        интереса является Мраморный каньон — большое вытянутое с юга на север озеро с кристально чистой водой
+                        и отвесными берегами, состоящими из настоящего мрамора.
+                    </p>
+
+                    <h4>Рускеальские водопады Ахвенкоски</h4>
+                    <p>
+                        Небольшие, но живописные каскады на лесной реке Тохмайоки, привлекшие в свое время многих кинорежиссеров.
+                        Здесь проходили съемки знаменитых кинофильмов «А зори здесь тихие…» и «Темный мир».
+                        <strong>Вход на экотропу оплачивается дополнительно по желанию.</strong>
+                    </p>
+
+                    <h4>Посещение музея живой истории и деревни викингов</h4>
+                    <p>
+                        Комплекс «Бастiонъ» — это музей живой истории, посвященный эпохе викингов. Его территория более 1 га!
+                        Для вас проведут интерактивную экскурсию по реконструированному поселению древних мореходов.
+                    </p>
+
+                    <h4>Город Сортавала</h4>
+                    <p>
+                        Заселение в отель. Свободное время. Вас ожидает комфортабельный отель на берегу Ладожского озера или в центре
+                        города Сортавала. Свободный вечер вы можете провести в одном из многочисленных кафе или просто прогуляться
+                        по этому городу.
+                    </p>
+
+                    <h3>3 день (четверг)</h3>
+                    <h4>Завтрак в отеле</h4>
+                    <p>(включено)</p>
+
+                    <h4>Подъем на гору Паасо</h4>
+                    <p>
+                        Гора Паасо — живописная возвышенность вблизи города Сортавала. Отсюда открывается панорамный вид на природные
+                        красоты и памятники истории древних карелов.
+                    </p>
+
+                    <h4>Авторская экскурсия «Скалистый берег Кирьявалахти»</h4>
+                    <p>
+                        Самые красивые пейзажи Ладожского озера с разбросанными по его глади скалистыми островами.
+                        В солнечную погоду его воды искрятся, отчего залив и получил свое название, означающее
+                        «искристый, пестрый залив».
+                    </p>
+
+                    <h4>Обед</h4>
+                    <p>(650-850 р, по желанию)</p>
+
+                    <h4>Остановка у Фирменного магазина форелевого хозяйства</h4>
+                    <p>
+                        На обратном пути мы заедем за карельскими дарами. Магазин предлагает копченую и соленую красную рыбу,
+                        которую можно упаковать в термопакеты.
+                    </p>
+
+                    <h4>Посещение минерального центра карельского шунгита</h4>
+                    <p>
+                        Минеральный центр сочетает в себе музей, место для отдыха и оздоровления. Вы познакомитесь с загадочным
+                        минералом шунгитом и его свойствами, сможете оздоровиться в шунгитовой комнате и приобрести изделия из этого камня.
+                    </p>
+
+                    <h3>4 день (пятница)</h3>
+                    <h4>Завтрак в отеле</h4>
+                    <p>(включено)</p>
+
+                    <h4>Посещение ГЭС в Ляскеля</h4>
+                    <p>
+                        Одна из старейших ГЭС в России. Примечательна своей полной автоматизацией и гремящим водопадом, на котором она расположена.
+                    </p>
+
+                    <h4>Водопады Белые Мосты (Юканкоски)</h4>
+                    <p>
+                        Крупнейшие водопады Карелии. Удобная деревянная лестница позволит насладиться их красотой.
+                        <em>Посещение может быть отменено из-за погодных условий, в этом случае вы посетите долину реки Янисйоки.</em>
+                    </p>
+
+                    <h4>Посещение Карельского зоопарка</h4>
+                    <p>
+                        Крупнейший зоопарк на Северо-Западе, расположенный среди карельских лесов. Животные содержатся на просторной территории.
+                    </p>
+
+                    <h3>5 день (суббота)</h3>
+                    <p>09:08 – Прибытие в Москву на Ленинградский вокзал.</p>
+
+                    <h2>Стоимость тура</h2>
+                    <ul>
+                        <li>В отеле 3*: 19,950 р., одноместное размещение - 27,250 р.</li>
+                        <li>В отеле 4*: 22,750 р., одноместное размещение - 32,150 р.</li>
+                    </ul>
+                    <p><strong>Детям и пенсионерам скидки от 500 до 800 р.</strong></p>
+                    <p>Для брони можно написать в WhatsApp: 8(960)067-30-97 менеджер Ульяна.</p>
+
+                    <h3>Включено</h3>
+                    <ul>
+                        <li>Проживание в отеле выбранной категории</li>
+                        <li>Экскурсии по программе</li>
+                        <li>Входные билеты в музеи</li>
+                        <li>Питание по программе</li>
+                        <li>Сопровождение экскурсоводом</li>
+                        <li>Туристический автобус</li>
+                    </ul>
+                </div>
+
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const apiUrl = 'http://localhost:5047/api/Tours';
+
+        async function loadTour() {
+            try {
+                const response = await fetch(apiUrl);
+                const tours = await response.json();
+
+                // Ищем конкретный тур по id или ссылке
+                const tour = tours.find(t => t.linkToCard === "tours/tour1.html");
+
+                if (tour) {
+                    document.getElementById("tour-title").textContent = tour.tourName;
+                    document.getElementById("tour-image").src = tour.picture;
+                    document.getElementById("tour-departure").textContent = tour.departureCity;
+                    document.getElementById("tour-start-date").textContent = new Date(tour.startDate).toLocaleDateString('ru-RU');
+                    document.getElementById("tour-end-date").textContent = new Date(tour.finishDate).toLocaleDateString('ru-RU');
+                    document.getElementById("tour-places").textContent = tour.amountofPlaces;
+                    document.getElementById("tour-price").textContent = tour.price.toLocaleString('ru-RU');
+                } else {
+                    console.error("Тур не найден в данных API.");
+                }
+            } catch (error) {
+                console.error("Ошибка загрузки данных из API:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadTour);
+    </script>
+</body>
+</html>

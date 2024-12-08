@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обратная связь - Золотая Середина</title>
+    <link href="../styles/regstyle.css" rel="stylesheet" type="text/css"> <!-- Подключение стилей -->
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.jpg" class="header-logo"> <!-- Путь к логотипу -->
+            </a>
+            <h1>Обратная связь</h1>
+        </div>
+    </header>
+    <main>
+        <section class="feedback-form">
+            <h2>Напишите нам</h2>
+            <form action="../index.html" method="GET"> <!-- Укажите путь для обработки формы -->
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+
+                <label for="subject">Тема:</label>
+                <input type="text" id="subject" name="subject" placeholder="Введите тему сообщения" required>
+
+                <label for="message">Сообщение:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Введите ваше сообщение" required></textarea>
+
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Серафимо-Дивеевский монастырь - Золотая Середина</title>
+    <link href="../../styles/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../../index.html"><img src="../../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='../registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../../index.html">Главная</a></li>
+            <li><a href="../about.html">О нас</a></li>
+            <li><a href="../tours.html">Туры</a></li>
+            <li><a href="../contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <aside class="sidebar">
+                <a href="../buying.html">Как купить</a>
+                <a href="../1dayex.html">Однодневные экскурсии</a>
+                <a href="../articles.html">Статьи</a>
+                <a href="../feedback.html">Обратная связь</a>
+
+                <!-- Поле поиска -->
+                <form class="search-form" onsubmit="highlightText(event)">
+                    <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                    <button type="submit" class="button">Поиск</button>
+                </form>
+            </aside>
+
+            <section class="content">
+                <h2 style="text-align: center;">Серафимо-Дивеевский монастырь</h2>
+                <img src="../../images/artlogo.jpg" style="width: 200px; padding: 40px; float: left; margin-right: 20px;">
+                <p>Серафимо-Дивеевский монастырь — один из самых известных монастырей России, расположенный в Нижегородской области, в Дивеево. Он был основан в 1830 году и посвящен Серафиму Саровскому. Монастырь стал важным центром духовной жизни, привлекающим паломников со всей страны.</p>
+                <p>Архитектура монастыря великолепна. Главный храм, собор в честь Серафима Саровского, поражает своими размерами и красотой. Внутреннее убранство восхищает гостей своими иконами и фресками.</p>
+                <p>Каждый год в монастыре проходят различные праздники и службы, которые собирают тысячи верующих. Здесь можно увидеть много интересных объектов: обители, крестные ходы и паломников.</p>
+                <p>Монастырь также известен своими целебными источниками, которые привлекают людей, ищущих исцеление и покой. Это место считается священным, и многие паломники приезжают сюда, чтобы укрепить свою веру и получить духовное просвещение.</p>
+                <p>Мы предлагаем экскурсии в Серафимо-Дивеевский монастырь с профессиональными гидами, которые расскажут об истории и значении этого места для православной культуры.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+
+    <div id="notification"></div>
+
+    <script>
+        function highlightText(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const searchTerm = document.getElementById('search-input').value;
+            const content = document.querySelector('.content'); // Получаем элемент с контентом
+            const notification = document.getElementById('notification'); // Элемент для уведомления
+    
+            // Сначала убираем предыдущие выделения
+            clearHighlights(content);
+            notification.classList.remove('show'); // Скрываем уведомление
+    
+            // Теперь выделяем новый текст
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
+                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
+    
+                if (!matches) {
+                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
+                    // Показываем уведомление
+                    notification.classList.add('show'); // Добавляем класс для отображения
+                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
+                    setTimeout(() => {
+                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
+                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
+                    }, 2000); // Скрываем уведомление через 4 секунды
+                }
+    
+                // Если совпадения есть, просто выделяем текст
+                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+    
+        function clearHighlights(container) {
+            // Удаляем выделение, если оно есть
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+        }
+    </script>
+</body>
+</html>

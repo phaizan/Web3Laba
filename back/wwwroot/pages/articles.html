@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статьи - Туроператор Золотая Середина</title>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+        .article-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .article-preview {
+            width: 30%;
+            margin-bottom: 30px;
+        }
+        .article-preview a {
+            color: inherit;
+        }
+        .article-preview img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            cursor: pointer;
+        }
+        .article-preview h3 {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14pt;
+            cursor: pointer;
+        }
+        .article-preview p {
+            text-align: justify;
+            margin: 15px 0;
+        }
+        .read-more {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #f4b841;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            width: fit-content;
+        }
+        .read-more:hover {
+            background-color: #d4952f;
+        }
+        .sidebar {
+            width: 20%;
+            padding-right: 20px;
+        }
+        .content {
+            width: 75%;
+        }
+        .main-content {
+            display: flex;
+        }
+        .highlight {
+            background-color: yellow; /* Цвет выделения */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html"><img src="../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='../pages/registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="../pages/about.html">О нас</a></li>
+            <li><a href="../pages/tours.html">Туры</a></li>
+            <li><a href="../pages/contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <aside class="sidebar">
+                <a href="../pages/buying.html">Как купить</a>
+                <a href="../pages/1dayex.html">Однодневные экскурсии</a>
+                <a href="../pages/articles.html">Статьи</a>
+                <a href="../pages/feedback.html">Обратная связь</a>
+
+                <!-- Поле поиска -->
+                <form class="search-form" onsubmit="highlightText(event)">
+                    <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                    <button type="submit" class="button">Поиск</button>
+                </form>
+            </aside>
+
+            <section class="content">
+                <h2>Статьи</h2>
+                <div class="article-container">
+
+                    <!-- Превью статьи 1 -->
+                    <div class="article-preview">
+                        <a href="articles/article1.html">
+                            <img src="../images/logo.jpg">
+                            <h3>На чем лучше добираться в Нижний Новгород!?</h3>
+                        </a>
+                        <p>На чем лучше добираться на экскурсию в Нижний Новгород!? 1. Ночной поезд. Едет в среднем 6 часов. Плацкарт и купе в среднем от 1500 до 6500 р. Причем и купе можно урвать за 2500 р. И св за 3500 р. Но смысл? Если можно добраться с комфортом за 4 часа!</p>
+                        <a href="articles/article1.html" class="read-more">Читать далее</a>
+                    </div>
+
+                    <!-- Превью статьи 2 -->
+                    <div class="article-preview">
+                        <a href="articles/article2.html">
+                            <img src="../images/logo.jpg">
+                            <h3>Топ-7 Что посмотреть в Парке Зарядье?</h3>
+                        </a>
+                        <p>Парк Зарядье располагается в самом сердце Москвы, рядом с Красной площадью, на месте старой гостиницы Россия. Уникальный проект открылся в 9 сентября 2017 года. Здесь можно увидеть экосистемы разных областей России...</p>
+                        <a href="articles/article2.html" class="read-more">Читать далее</a>
+                    </div>
+
+                    <!-- Превью статьи 3 -->
+                    <div class="article-preview">
+                        <a href="articles/article3.html">
+                            <img src="../images/logo.jpg">
+                            <h3>10 интересных фактов<br> о Дивеево</h3>
+                        </a>
+                        <p>1. Серафимо-Дивеевский монастырь – удел Пресвятой Богородицы. Четыре места на Земле Господь поручил Царице Небесной под особое Ее покровительство. 2. Основание Дивеевской обители в середине XVIII века...</p>
+                        
+                        <a href="articles/article3.html" class="read-more">Читать далее</a>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+
+    <div id="notification"></div>
+
+    <script>
+        function highlightText(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const searchTerm = document.getElementById('search-input').value;
+            const content = document.querySelector('.content'); // Получаем элемент с контентом
+            const notification = document.getElementById('notification'); // Элемент для уведомления
+    
+            // Сначала убираем предыдущие выделения
+            clearHighlights(content);
+            notification.classList.remove('show'); // Скрываем уведомление
+    
+            // Теперь выделяем новый текст
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
+                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
+    
+                if (!matches) {
+                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
+                    // Показываем уведомление
+                    notification.classList.add('show'); // Добавляем класс для отображения
+                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
+                    setTimeout(() => {
+                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
+                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
+                    }, 2000); // Скрываем уведомление через 4 секунды
+                }
+    
+                // Если совпадения есть, просто выделяем текст
+                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+    
+        function clearHighlights(container) {
+            // Удаляем выделение, если оно есть
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+        }
+    </script>
+</body>
+</html>

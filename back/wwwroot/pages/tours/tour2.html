@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru" style="width:auto;">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тур на 4 дня в Калмыкию! На поезде из Москвы! - Золотая Середина</title>
+    <link href="../../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+
+
+        .tour-content {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 30px;
+        }
+
+            .tour-content img {
+                width: 430px;
+                height: 230px;
+                margin-right: 40px;
+                margin-left: 20px;
+                border-radius: 10px;
+            }
+
+        .tour-info {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+        }
+
+            .tour-info h2 {
+                margin-bottom: 15px;
+            }
+
+            .tour-info p {
+                margin: 8px 0; /* Уменьшены отступы между параграфами */
+                line-height: 1; /* Уменьшено расстояние между строками */
+            }
+
+            .tour-info .book-button {
+                display: inline-block;
+                padding: 10px 10px;
+                background-color: #f4b841;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+
+        .book-button {
+            display: inline-block;
+            padding: 10px 10px;
+            width: 150px;
+            background-color: #f4b841;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+
+        .tour-info .book-button:hover {
+            background-color: #d4952f;
+        }
+
+        .tour-main-text {
+            margin-top: 40px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: flex;
+        }
+
+        .custom-marker {
+            list-style-type: none; /* Убираем стандартные маркеры */
+            padding-left: 1.5em; /* Сдвигаем содержимое вправо для маркера */
+        }
+
+            .custom-marker li::before {
+                content: "⦾ "; /* Задаем символ маркера */
+                font-size: 16px; /* Размер маркера */
+                margin-right: 0.5em; /* Пробел между маркером и текстом */
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../../index.html"><img src="../../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='../registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../../index.html">Главная</a></li>
+            <li><a href="../about.html">О нас</a></li>
+            <li><a href="../tours.html">Туры</a></li>
+            <li><a href="../contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <a href="../buying.html">Как купить</a>
+                <a href="../1dayex.html">Однодневные экскурсии</a>
+                <a href="../articles.html">Статьи</a>
+                <a href="../feedback.html">Обратная связь</a>
+
+                <!-- Search form -->
+                <form class="search-form">
+                    <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                    <button type="submit" class="button">Поиск</button>
+                </form>
+            </aside>
+
+            <!-- Tour content -->
+            <section class="content">
+                <h2 style="text-align: center; padding-bottom: 10px;" id="tour-title">
+                    Загрузка тура...
+                </h2>
+
+                <!-- Главный блок с изображением и характеристиками -->
+                <div class="tour-content">
+                    <div class="gallery-container">
+                        <img id="tour-image" src="../../images/tou.jpg" alt="Тур" class="tour-image">
+                    </div>
+                    <div class="tour-info">
+                        <p><strong>Город отправления:</strong> <span id="tour-departure">...</span></p>
+                        <p><strong>Дата отправления:</strong> <span id="tour-start-date">...</span></p>
+                        <p><strong>Дата прибытия:</strong> <span id="tour-end-date">...</span></p>
+                        <p><strong>Свободных мест:</strong> <span id="tour-places">...</span></p>
+                        <p><strong>Цена:</strong> <span id="tour-price">...</span> руб.</p>
+                        <a href="#" class="book-button">Забронировать</a>
+                    </div>
+                </div>
+
+                <!-- Блок с полным описанием тура -->
+                <div class="tour-main-text">
+                    <h1>Мурманск и Териберка: путешествие на Край Земли</h1>
+                    <p>
+                        <strong>Вы когда-нибудь мечтали побывать на Краю Земли?</strong>
+                        Северное сияние, величественная Арктическая тундра, шум Баренцева моря, северные олени, хаски и культура саамов ждут вас!
+                        Этот тур познакомит вас с красотами Русского Заполярья и подарит незабываемые впечатления.
+                    </p>
+
+                    <h2>Программа тура</h2>
+
+                    <h3>1 день</h3>
+                    <ul>
+                        <li>
+                            <strong>10:30–11:15:</strong> Встреча с гидом в аэропорту г. Мурманск.
+                            <em>Для поздних рейсов — возможность самостоятельного трансфера.</em>
+                        </li>
+                        <li><strong>12:00–12:30:</strong> Встреча с гидом на ж/д вокзале г. Мурманска.</li>
+                        <li>
+                            <strong>Обзорная экскурсия</strong> <em>«Мурманск – город, рожденный под северным сиянием»:</em>
+                                <ul class="custom-marker">
+                                    <li>Посещение памятников, музеев и ключевых достопримечательностей города.</li>
+                                    <li>Визит в музей истории Мурманского морского торгового порта.</li>
+                                </ul>
+                        </li>
+                        <li><strong>Обед:</strong> включено.</li>
+                        <li>
+                            <strong>Продолжение экскурсии:</strong>
+                            Памятники «Ждущая», «Мурманский Алеша», храм Спас-на-Водах, подводная лодка «Курск».
+                        </li>
+                        <li><strong>18:30:</strong> Заселение в отель «69 параллель». Свободное время. Ужин самостоятельно.</li>
+                        <li>
+                            <strong>Выезд на экскурсию:</strong> «В поисках Северного сияния»
+                            <em>(проводится при благоприятных природных условиях в 1-й или 2-й день тура).</em>
+                        </li>
+                    </ul>
+
+                    <h3>2 день</h3>
+                    <ul>
+                        <li><strong>Завтрак в отеле:</strong> включено.</li>
+                        <li><strong>Переезд в Териберку (~134 км).</strong></li>
+                        <li>
+                            <strong>Прогулка по Териберке:</strong>
+                            Уникальные пейзажи, Баренцево море, национальная кухня и следы эпохи динозавров.
+                        </li>
+                        <li><strong>Обед:</strong> включено.</li>
+                        <li>
+                            Возможность прокатиться на санях до Батарейского водопада
+                            <em>(дополнительно, от 1000 руб./чел.).</em>
+                        </li>
+                        <li><strong>19:30:</strong> Возвращение в отель. Свободное время. Ужин самостоятельно.</li>
+                        <li>
+                            <em>Альтернативная программа:</em> В случае непогоды — поездка в Кировск с посещением музейного комплекса.
+                        </li>
+                    </ul>
+
+                    <h3>3 день</h3>
+                    <ul>
+                        <li><strong>Завтрак в отеле:</strong> включено.</li>
+                        <li><strong>Освобождение номеров.</strong></li>
+                        <li>
+                            <strong>Экскурсия:</strong> на атомный ледокол «Ленин» — уникальный корабль-музей.
+                        </li>
+                        <li><strong>Переезд в дер. Лопарская (50 км).</strong></li>
+                        <li>
+                            <strong>Посещение:</strong> деревянной церкви и фотостоп у подвесного моста.
+                        </li>
+                        <li>
+                            <strong>Этнический обед:</strong> блюда местной кухни, знакомство с саамской культурой в этнографическом комплексе «Олений двор».
+                        </li>
+                        <li><strong>15:30:</strong> Окончание программы. Трансфер в аэропорт и на ж/д вокзал.</li>
+                    </ul>
+
+                    <h2>Стоимость тура</h2>
+                    <ul>
+                        <li><strong>2-местный номер:</strong> 27 500 руб./чел.</li>
+                        <li><strong>1-местный номер:</strong> 29 800 руб./чел.</li>
+                        <li><strong>3-местный номер:</strong> под запрос.</li>
+                    </ul>
+
+                    <h2>В стоимость включено:</h2>
+                    <ul>
+                        <li>Транспортные услуги по маршруту.</li>
+                        <li>Услуги гида-сопровождающего.</li>
+                        <li>Проживание в гостинице.</li>
+                        <li>Питание по программе (2 завтрака, 3 обеда).</li>
+                        <li>Экскурсионное обслуживание.</li>
+                        <li>Входные билеты.</li>
+                        <li>Трансфер на ж/д вокзал или в аэропорт.</li>
+                    </ul>
+
+                    <h2>Дополнительно оплачивается:</h2>
+                    <ul>
+                        <li>Ж/д или авиаперелет Москва–Мурманск–Москва.</li>
+                    </ul>
+
+                    <h2>Рекомендуемые рейсы</h2>
+                    <ul>
+                        <li><strong>Туда:</strong> рейс с прибытием до 11:00.</li>
+                        <li><strong>Обратно:</strong> рейс с вылетом после 18:30.</li>
+                    </ul>
+                </div>
+
+
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const apiUrl = 'http://localhost:5047/api/Tours';
+
+        async function loadTour() {
+            try {
+                const response = await fetch(apiUrl);
+                const tours = await response.json();
+
+                // Ищем конкретный тур по id или ссылке
+                const tour = tours.find(t => t.linkToCard === "tours/tour2.html");
+
+                if (tour) {
+                    document.getElementById("tour-title").textContent = tour.tourName;
+                    document.getElementById("tour-image").src = tour.picture;
+                    document.getElementById("tour-departure").textContent = tour.departureCity;
+                    document.getElementById("tour-start-date").textContent = new Date(tour.startDate).toLocaleDateString('ru-RU');
+                    document.getElementById("tour-end-date").textContent = new Date(tour.finishDate).toLocaleDateString('ru-RU');
+                    document.getElementById("tour-places").textContent = tour.amountofPlaces;
+                    document.getElementById("tour-price").textContent = tour.price.toLocaleString('ru-RU');
+                } else {
+                    console.error("Тур не найден в данных API.");
+                }
+            } catch (error) {
+                console.error("Ошибка загрузки данных из API:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadTour);
+    </script>
+</body>
+</html>

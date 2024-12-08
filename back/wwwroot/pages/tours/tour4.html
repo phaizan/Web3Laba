@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ru" style="width:auto;">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тур на 4 дня в Калмыкию! На поезде из Москвы! - Золотая Середина</title>
+    <link href="../../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+
+
+        .tour-content {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 30px;
+        }
+
+            .tour-content img {
+                width: 430px;
+                height: 230px;
+                margin-right: 40px;
+                margin-left: 20px;
+                border-radius: 10px;
+            }
+
+        .tour-info {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+        }
+
+            .tour-info h2 {
+                margin-bottom: 15px;
+            }
+
+            .tour-info p {
+                margin: 8px 0; /* Уменьшены отступы между параграфами */
+                line-height: 1; /* Уменьшено расстояние между строками */
+            }
+
+            .tour-info .book-button {
+                display: inline-block;
+                padding: 10px 10px;
+                background-color: #f4b841;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+
+        .book-button {
+            display: inline-block;
+            padding: 10px 10px;
+            width: 150px;
+            background-color: #f4b841;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+
+        .tour-info .book-button:hover {
+            background-color: #d4952f;
+        }
+
+        .tour-main-text {
+            margin-top: 40px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../../index.html"><img src="../../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='../registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../../index.html">Главная</a></li>
+            <li><a href="../about.html">О нас</a></li>
+            <li><a href="../tours.html">Туры</a></li>
+            <li><a href="../contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <a href="../buying.html">Как купить</a>
+                <a href="../1dayex.html">Однодневные экскурсии</a>
+                <a href="../articles.html">Статьи</a>
+                <a href="../feedback.html">Обратная связь</a>
+
+                <!-- Search form -->
+                <form class="search-form">
+                    <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                    <button type="submit" class="button">Поиск</button>
+                </form>
+            </aside>
+
+            <!-- Tour content -->
+            <section class="content">
+                <h2 style="text-align: center; padding-bottom: 10px;" id="tour-title">
+                    Загрузка тура...
+                </h2>
+
+                <!-- Главный блок с изображением и характеристиками -->
+                <div class="tour-content">
+                    <div class="gallery-container">
+                        <img id="tour-image" src="../../images/tou.jpg" alt="Тур" class="tour-image">
+                    </div>
+                    <div class="tour-info">
+                        <p><strong>Город отправления:</strong> <span id="tour-departure">...</span></p>
+                        <p><strong>Дата отправления:</strong> <span id="tour-start-date">...</span></p>
+                        <p><strong>Дата прибытия:</strong> <span id="tour-end-date">...</span></p>
+                        <p><strong>Свободных мест:</strong> <span id="tour-places">...</span></p>
+                        <p><strong>Цена:</strong> <span id="tour-price">...</span> руб.</p>
+                        <a href="#" class="book-button">Забронировать</a>
+                    </div>
+                </div>
+
+                <!-- Блок с полным описанием тура -->
+                <div class="tour-main-text">
+                    <p>Приглашаем вас отправиться в сказочное путешествие на родину Деда Мороза. Великий Устюг - это зимняя столица семейного туризма России, пропитанная невероятной атмосферой сказки, праздника, уюта и гостеприимства.</p>
+
+                    <p><strong>В программе:</strong></p>
+
+                    <p><strong>1 день (27 декабря)</strong></p>
+                    <ul>
+                        <li>Отправление на поезде из Москвы в Котлас с Ярославского вокзала.</li>
+                    </ul>
+
+                    <p><strong>2 день (28 декабря)</strong></p>
+                    <ul>
+                        <li>09:00 - 10:00 Прибытие на ж/д станцию "Котлас Южный". Встреча с гидом на перроне у входа в здание вокзала.</li>
+                        <li>Отправление на Вотчину Деда Мороза.</li>
+                        <li>Размещение в коттеджах на Вотчине Деда Мороза. Для вас 2-хместные номера с удобствами. Можно заказать 1-местное размещение за доплату.</li>
+                        <li>Обед в ресторане "Снежинка" "шведский стол" (включено).</li>
+                        <li>Путешествие по Тропе сказок, на которой вас встретят помощники Деда Мороза - сказочные герои, загадывают загадки, веселят и развлекают.</li>
+                        <li>Посещение Дома Деда Мороза, который находится в самом центре Вотчины. Построен он из дерева, два этажа и 12 волшебных комнат, ни одна на другую не похожа. Сказочные помощницы расскажут вам обо всех живущих в нем чудесах.</li>
+                        <li>Интерактивная программа-встреча "Сказочки на лавочках". Вас ждет чудесная встреча с Дедом Морозом. Вы услышите любимую сказку Зимнего Волшебника, вспомните самых неожиданных героев русских сказок, а главное - сможете сочинить новую сказку, свою собственную.</li>
+                        <li>Свободное время на Вотчине. Можно посетить Зимний сад, аттракционы, зоопарк и торговые ряды (самостоятельно).</li>
+                    </ul>
+
+                    <p><strong>3 день (29 декабря)</strong></p>
+                    <ul>
+                        <li>Свободный день на Вотчине Деда Мороза.</li>
+                        <li>Завтрак в ресторане "Снежинка" "шведский стол" (включено).</li>
+                        <li>Обед в ресторане "Снежинка" "шведский стол" (включено).</li>
+                    </ul>
+
+                    <p><strong>4 день (30 декабря)</strong></p>
+                    <ul>
+                        <li>Завтрак в ресторане "Снежинка" "шведский стол" (включено). Освобождение номеров.</li>
+                        <li>Экскурсия в Дом Моды Деда Мороза. Только здесь вы сможете увидеть таинство создания нарядов для Деда Мороза и его свиты, принять участие в волшебном дефиле, изготовить сказочный сувенир своими руками, посетить выставку "Времена года", приобрести эксклюзивный сувенир от зимнего волшебника.</li>
+                        <li>Вертепное представление "Звезды Рождественской сияние…" - история рождения Иисуса Христа, показанная в вертепном спектакле, рассказ о традиции празднования Рождества, о блюдах для рождественского стола, украшении рождественской елки.</li>
+                        <li>Обед в кафе города (включено).</li>
+                        <li>Мастер-класс по народным промыслам: "В иконописной мастерской", "Урок в старорусской школе", "Кружевная сказка", "Берестяное чудо", "Жар-птица" или экскурсия в один из музеев города.</li>
+                        <li>Интерактивная программа "Русские посиделки" с гаданиями, старорусскими играми и песнями, вручение Свидетельств о пребывании в Великом Устюге.</li>
+                        <li>Трансфер на ж/д станцию "Котлас Южный".</li>
+                        <li>19:00 - 20:00 Отправление в Москву.</li>
+                    </ul>
+
+                    <p><strong>5 день (31 декабря)</strong></p>
+                    <ul>
+                        <li>Прибытие в Москву на Ярославский вокзал.</li>
+                    </ul>
+
+                    <p><strong>Стоимость тура зависит от выбранной категории отеля:</strong></p>
+                    <ul>
+                        <li>Коттедж "Устюггаз": для взрослых - 28750 р., для детей от 7 до 17 лет - 28000 р., 28-30.12.2024: для взрослых - 35000 р., для детей от 7 до 17 лет - 34300 р.</li>
+                        <li>Коттедж "Домик землепроходцев": для взрослых - 30000 р., для детей от 7 до 17 лет - 29200 р., 28-30.12.2024: для взрослых - 38750 р., для детей от 7 до 17 лет - 38000 р.</li>
+                    </ul>
+
+                    <p><strong>В стоимость тура входит:</strong></p>
+                    <ul>
+                        <li>Проживание в коттедже на Вотчине Деда Мороза, питание по программе (2 завтрака, 3 обеда), групповое транспортное и экскурсионное обслуживание, программа на Вотчине, Свидетельство о пребывании в Великом Устюге, услуги групповода.</li>
+                    </ul>
+
+                    <p><strong>Дополнительно приобретаются:</strong></p>
+                    <ul>
+                        <li>Ж/д билеты Москва - Котлас - Москва, сладкий подарок от Деда Мороза - 1000 р. (по желанию).</li>
+                    </ul>
+
+                    <p>Вы можете заказать экскурсию в Великий Устюг для своей группы. Стоимость расчитывается индивидуально.</p>
+                </div>
+
+
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+    </footer>
+
+    <script>
+        const apiUrl = 'http://localhost:5047/api/Tours';
+
+        async function loadTour() {
+            try {
+                const response = await fetch(apiUrl);
+                const tours = await response.json();
+
+                // Ищем конкретный тур по id или ссылке
+                const tour = tours.find(t => t.linkToCard === "tours/tour4.html");
+
+                if (tour) {
+                    document.getElementById("tour-title").textContent = tour.tourName;
+                    document.getElementById("tour-image").src = tour.picture;
+                    document.getElementById("tour-departure").textContent = tour.departureCity;
+                    document.getElementById("tour-start-date").textContent = new Date(tour.startDate).toLocaleDateString('ru-RU');
+                    document.getElementById("tour-end-date").textContent = new Date(tour.finishDate).toLocaleDateString('ru-RU');
+                    document.getElementById("tour-places").textContent = tour.amountofPlaces;
+                    document.getElementById("tour-price").textContent = tour.price.toLocaleString('ru-RU');
+                } else {
+                    console.error("Тур не найден в данных API.");
+                }
+            } catch (error) {
+                console.error("Ошибка загрузки данных из API:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadTour);
+    </script>
+</body>
+</html>

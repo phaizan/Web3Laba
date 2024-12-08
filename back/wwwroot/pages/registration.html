@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Золотая Середина</title>
+    <link href="../styles/regstyle.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.jpg" class="header-logo">
+            </a>
+            <h1>Регистрация</h1>
+        </div>
+    </header>
+    <main>
+        <section class="registration-form">
+            <h2>Создать аккаунт</h2>
+            <form id="registration-form">
+                <label for="surname">Фамилия:</label>
+                <input type="text" id="surname" name="surname" placeholder="Введите вашу фамилию" required>
+
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+
+                <label for="phone">Телефон:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Введите ваш номер телефона" required>
+
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+
+                <label for="confirm-password">Повторите пароль:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Повторите пароль" required>
+
+                <label for="city">Город:</label>
+                <select id="city" name="city" required>
+                    <option value="">Выберите город</option>
+                    <option value="Москва">Москва</option>
+                    <option value="Балашиха">Балашиха</option>
+                    <option value="Подольск">Подольск</option>
+                    <option value="Мытищи">Мытищи</option>
+                    <option value="Королев">Королев</option>
+                    <option value="Щелково">Щелково</option>
+                    <option value="Купавна">Купавна</option>
+                    <option value="Раменское">Раменское</option>
+                    <option value="Люберцы">Люберцы</option>
+                    <option value="Зеленоград">Зеленоград</option>
+                </select>
+
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Скрипт для проверки совпадения паролей
+        document.getElementById('registration-form').addEventListener('submit', function (event) {
+            // Останавливаем стандартное поведение формы
+            event.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Проверяем совпадение паролей
+            if (password !== confirmPassword) {
+                alert("Пароли не совпадают!");
+                return; // Если пароли не совпадают, не отправляем форму
+            }
+
+            // Собираем данные формы
+            const data = {
+                surname: document.getElementById('surname').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                password: document.getElementById('password').value,
+                city: document.getElementById('city').value
+            };
+
+            // Выводим собранные данные в консоль перед отправкой
+            console.log("Отправляемые данные:", JSON.stringify(data));  // Печатает строку JSON
+
+            fetch('http://localhost:5047/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) // Преобразуем данные формы в JSON
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Успех:', data);
+                    // Перенаправляем на главную страницу
+                    window.location.href = "../index.html";
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                });
+
+
+
+        });
+
+    </script>
+</body>
+</html>

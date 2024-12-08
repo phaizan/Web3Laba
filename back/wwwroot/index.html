@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туроператор Золотая Середина</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html"><img src="images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form" id="login-form">
+                <div class="login-fields">
+                    <input type="email" id="email" name="login" placeholder="Email" required>
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="button" id="login-button" class="button1">Войти</button>
+                    <button onclick="location.href='pages/registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+            <script>
+                document.getElementById('login-button').addEventListener('click', async () => {
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (response.ok) {
+                        const { token } = await response.json();
+                        localStorage.setItem('jwt', token); // Сохраняем токен
+                        alert('Успешный вход!');
+                    } else {
+                        alert('Ошибка входа!');
+                    }
+                });
+            </script>
+
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="pages/about.html">О нас</a></li>
+            <li><a href="pages/tours.html">Туры</a></li>
+            <li><a href="pages/contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <aside class="sidebar">
+            <a href="pages/buying.html">Как купить</a>
+            <a href="pages/1dayex.html">Однодневные экскурсии</a>
+            <a href="pages/articles.html">Статьи</a>
+            <a href="pages/feedback.html">Обратная связь</a>
+        
+            <!-- Поле поиска -->
+            <form class="search-form" onsubmit="highlightText(event)">
+                <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                <button type="submit" class="button">Поиск</button>
+            </form>
+        
+        </aside>
+        
+        <section class="content">
+            <h2>Добро пожаловать в "Золотую Середину"</h2>
+            <p class="kareliya"><img src="images/zagorod.jpg" class="city-image"></p>
+
+            <span class="opisanie">
+                <p>Наша туристическая компания предоставляет вам исключительные возможности для незабываемых путешествий, 
+                    где каждый момент наполнен яркими эмоциями и впечатлениями. Мы специализируемся на организации экскурсий и туров, которые гармонично сочетают 
+                    в себе комфорт, безопасность и насыщенную программу. Путешествуйте с нами и открывайте для себя новые горизонты!
+                </p> 
+                <p>Мы тщательно отбираем направления и разрабатываем уникальные программы, чтобы они соответствовали самым разным предпочтениям и интересам 
+                    наших клиентов. Наша команда экспертов берет на себя все организационные вопросы — от выбора маршрута до мелких деталей поездки, обеспечивая 
+                    вам максимальное удобство и полное погружение в атмосферу отдыха. Вам не нужно беспокоиться ни о чем: все заботы по планированию мы берем на 
+                    себя, чтобы вы могли наслаждаться каждым моментом!
+                </p>
+            </span>
+
+            <p>Наши ключевые предложения:</p>
+            <table class="content-table">
+                <tr><th>Направление</th><th>Город отправления</th><th>Количество мест</th></tr>
+                <tr><td>Феодосия</td><td>Москва</td><td>3</td></tr>
+                <tr><td>Калининград</td><td>Санкт-Петербург</td><td>5</td></tr>
+                <tr><td>Сочи</td><td>Ростов</td><td>4</td></tr>
+            </table>
+
+            <!-- Вставляем новый блок с информацией -->
+            <h2>Наши услуги</h2>
+            <ul class="services-list">
+                <li>Заказать школьный тур на автобусе или поезде по Москве и России.</li>
+                <li>Организовать корпоративный выезд для сотрудников вашей компании.</li>
+                <li>Путешествовать в составе наших сборных групп на автобусе, поезде, по Москве, Подмосковью, Золотому Кольцу и всей России.</li>
+                <li>Подобрать круиз по рекам России.</li>
+                <li>Заказать прием Вашей группы в городах России.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+    <div id="notification"></div>
+
+    <script>
+        function highlightText(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const searchTerm = document.getElementById('search-input').value;
+            const content = document.querySelector('.content'); // Получаем элемент с контентом
+            const notification = document.getElementById('notification'); // Элемент для уведомления
+    
+            // Сначала убираем предыдущие выделения
+            clearHighlights(content);
+            notification.classList.remove('show'); // Скрываем уведомление
+    
+            // Теперь выделяем новый текст
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
+                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
+    
+                if (!matches) {
+                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
+                    // Показываем уведомление
+                    notification.classList.add('show'); // Добавляем класс для отображения
+                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
+                    setTimeout(() => {
+                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
+                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
+                    }, 2000); // Скрываем уведомление через 4 секунды
+                }
+    
+                // Если совпадения есть, просто выделяем текст
+                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+    
+        function clearHighlights(container) {
+            // Удаляем выделение, если оно есть
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+        }
+    </script>
+
+    
+</body>
+</html>

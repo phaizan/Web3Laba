@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туры - Туроператор Золотая Середина</title>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+    <style>
+        .tour-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .tour-preview {
+            width: 30%;
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .tour-preview img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .tour-preview a {
+            color: inherit;
+        }
+        .tour-preview h3 {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .tour-preview p {
+            text-align: justify;
+            margin: 10px 0;
+        }
+        .tour-details {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .tour-price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .tour-preview .read-more {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #f4b841;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .tour-preview .read-more:hover {
+            background-color: #d4952f;
+        }
+        .sidebar {
+            width: 20%;
+            padding-right: 20px;
+        }
+        .content {
+            width: 75%;
+        }
+        .main-content {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html"><img src="../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="../pages/about.html">О нас</a></li>
+            <li><a href="../pages/tours.html">Туры</a></li>
+            <li><a href="../pages/contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="main-content">
+            <aside class="sidebar">
+                <a href="../pages/buying.html">Как купить</a>
+                <a href="../pages/1dayex.html">Однодневные экскурсии</a>
+                <a href="../pages/articles.html">Статьи</a>
+                <a href="../pages/feedback.html">Обратная связь</a>
+
+                <!-- Поле поиска -->
+            <form class="search-form" onsubmit="highlightText(event)">
+                <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                <button type="submit" class="button">Поиск</button>
+            </form>
+            </aside>
+
+            <section class="content">
+                <h2>Однодневные экскурсии</h2>
+                <div class="tour-container">
+
+                    <!-- Тур 1 -->
+                    <div class="tour-preview">
+                        <a href="#">
+                            <img src="../images/ex1.jpg">
+                            <h3>Экскурсия в Санкт-Петербург</h3>
+                        </a>
+                        <p>Краткое описание тура в Санкт-Петербург. Вы увидите основные достопримечательности города на Неве.</p>
+                        <div class="tour-details">
+                            <p>Свободных мест: 12</p>
+                            <p class="tour-price">Цена: 10,000 руб.</p>
+                        </div>
+                        <a href="#" class="read-more">Подробнее</a>
+                    </div>
+
+                    <!-- Тур 2 -->
+                    <div class="tour-preview">
+                        <a href="#">
+                            <img src="../images/ex2.jpeg">
+                            <h3>Путешествие по Золотому кольцу</h3>
+                        </a>
+                        <p>Отправьтесь в увлекательное путешествие по историческим городам Золотого кольца России.</p>
+                        <div class="tour-details">
+                            <p>Свободных мест: 8</p>
+                            <p class="tour-price">Цена: 15,000 руб.</p>
+                        </div>
+                        <a href="#" class="read-more">Подробнее</a>
+                    </div>
+
+                    <!-- Тур 3 -->
+                    <div class="tour-preview">
+                        <a href="#">
+                            <img src="../images/ex3.jpg">
+                            <h3>Экскурсия в Казань</h3>
+                        </a>
+                        <p>Узнайте историю древнего города Казань и посетите его ключевые достопримечательности.</p>
+                        <br>
+                        <div class="tour-details">
+                            <p>Свободных мест: 5</p>
+                            <p class="tour-price">Цена: 12,000 руб.</p>
+                        </div>
+                        <a href="#" class="read-more">Подробнее</a>
+                    </div>
+
+                    <!-- Тур 4 -->
+                    <div class="tour-preview">
+                        <a href="#">
+                            <img src="../images/ex4.jpg">
+                            <h3>Экскурсия в Сочи</h3>
+                        </a>
+                        <p>Отправьтесь на Черное море и насладитесь отдыхом на побережье Сочи.</p>
+                        <div class="tour-details">
+                            <p>Свободных мест: 10</p>
+                            <p class="tour-price">Цена: 20,000 руб.</p>
+                        </div>
+                        <a href="#" class="read-more">Подробнее</a>
+                    </div>
+
+                    <!-- Тур 5 -->
+                    <div class="tour-preview">
+                        <a href="#">
+                            <img src="../images/ex5.jpg">
+                            <h3>Тур в Алтай</h3>
+                        </a>
+                        <p>Насладитесь уникальной природой Алтая в одном из самых захватывающих туров.</p>
+                        <div class="tour-details">
+                            <p>Свободных мест: 7</p>
+                            <p class="tour-price">Цена: 25,000 руб.</p>
+                        </div>
+                        <a href="#" class="read-more">Подробнее</a>
+                    </div>
+
+                    <!-- Тур 6 -->
+                    <div class="tour-preview">
+                        <a href="#">
+                            <img src="../images/ex6.jpg">
+                            <h3>Экскурсия по Москве</h3>
+                        </a>
+                        <p>Откройте для себя самые интересные исторические места Москвы.</p>
+                        <div class="tour-details">
+                            <p>Свободных мест: 15</p>
+                            <p class="tour-price">Цена: 8,000 руб.</p>
+                        </div>
+                        <a href="#" class="read-more">Подробнее</a>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+
+    <div id="notification"></div>
+    <script>
+        function highlightText(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const searchTerm = document.getElementById('search-input').value;
+            const content = document.querySelector('.content'); // Получаем элемент с контентом
+            const notification = document.getElementById('notification'); // Элемент для уведомления
+    
+            // Сначала убираем предыдущие выделения
+            clearHighlights(content);
+            notification.classList.remove('show'); // Скрываем уведомление
+    
+            // Теперь выделяем новый текст
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
+                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
+    
+                if (!matches) {
+                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
+                    // Показываем уведомление
+                    notification.classList.add('show'); // Добавляем класс для отображения
+                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
+                    setTimeout(() => {
+                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
+                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
+                    }, 2000); // Скрываем уведомление через 4 секунды
+                }
+    
+                // Если совпадения есть, просто выделяем текст
+                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+    
+        function clearHighlights(container) {
+            // Удаляем выделение, если оно есть
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+        }
+    </script>
+
+</body>
+</html>

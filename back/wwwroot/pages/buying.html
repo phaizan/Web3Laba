@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как купить - Золотая Середина</title>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css"> <!-- Используем общий стиль -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html"><img src="../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+            <form class="login-form">
+                <div class="login-fields">
+                    <input type="text" name="login" placeholder="Логин" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" class="button1">Войти</button>
+                    <button onclick="location.href='registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="tours.html">Туры</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <aside class="sidebar">
+            <a href="buying.html">Как купить</a>
+            <a href="1dayex.html">Однодневные экскурсии</a>
+            <a href="articles.html">Статьи</a>
+            <a href="feedback.html">Обратная связь</a>
+            
+            <!-- Поле поиска -->
+            <form class="search-form" onsubmit="highlightText(event)">
+                <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                <button type="submit">Поиск</button>
+            </form>
+        </aside>
+
+        <section class="content">
+            <h2>Как купить</h2>
+            <p>
+                Чтобы поехать на <a href="1dayex.html">сборные 1-дневные экскурсии</a> или <a href="tours.html">многодневные туры на 2 и более дней</a>, 
+                нужно записаться на сайте или по телефону, внести предоплату 
+                и дождаться звонка менеджера накануне выезда с информацией о номере автобуса и 
+                мест в автобусе.<br>
+                Оплатить поездку можно любым удобным для вас способом.
+            </p>
+            <h4>1. Оплата по счету в любом банке вашего города или переводом от организации.</h4>
+            <p>ООО «Золотая середина»</p>
+            <p>117042, г. Москва, Чечёрский пр-д, д. 24, пом. 1, комн. 2, оф. 56</p>
+            <p>
+                ИНН <u>7727741484</u><br>
+                КПП 772701001<br>
+                Р/С: 40702810331030000091<br>
+                ФИЛИАЛ "Центральный" БАНКА ВТБ (ПАО) г. Москва<br>
+                К/с: 30101810145250000411<br>
+                БИК <u>044525411</u><br>
+                ОГРН <u>1117746112461</u>
+            </p>
+
+            <h4>2. Оплата банковской картой через платежную систему Юkassa: Visa, MasterCard, МИР, ЮMoney, Qiwi и другие способы.</h4>
+            <p>
+                Это самая надежная система переводов от Сбербанка, каждый платеж проверяется внутренней системой безопасности банка. Удобно для оплаты из любого города России.
+            </p>
+
+            <h4>3. Оплата через ПАО СБЕРБАНК с использованием банковских карт.</h4>
+            <p>
+                Для оплаты (ввода реквизитов Вашей карты) Вы будете перенаправлены на платёжный шлюз ПАО СБЕРБАНК. Соединение с платёжным шлюзом и передача информации осуществляется в защищённом режиме с использованием протокола шифрования SSL. В случае если Ваш банк поддерживает технологию безопасного проведения интернет-платежей Verified By Visa, MasterCard SecureCode, MIR Accept,<br> J-Secure, для проведения платежа также может потребоваться ввод специального пароля.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+
+    <div id="notification"></div>
+
+    <script>
+        function highlightText(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const searchTerm = document.getElementById('search-input').value;
+            const content = document.querySelector('.content'); // Получаем элемент с контентом
+            const notification = document.getElementById('notification'); // Элемент для уведомления
+    
+            // Сначала убираем предыдущие выделения
+            clearHighlights(content);
+            notification.classList.remove('show'); // Скрываем уведомление
+    
+            // Теперь выделяем новый текст
+            if (searchTerm) {
+                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
+                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
+    
+                if (!matches) {
+                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
+                    // Показываем уведомление
+                    notification.classList.add('show'); // Добавляем класс для отображения
+                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
+                    setTimeout(() => {
+                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
+                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
+                    }, 2000); // Скрываем уведомление через 4 секунды
+                }
+    
+                // Если совпадения есть, просто выделяем текст
+                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+            }
+        }
+    
+        function clearHighlights(container) {
+            // Удаляем выделение, если оно есть
+            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
+        }
+    </script>
+</body>
+</html>
