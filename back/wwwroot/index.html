@@ -16,9 +16,14 @@
         <div class="container">
             <a href="index.html"><img src="images/logo.jpg" class="logo"></a>
             <h1>Золотая Середина</h1>
+
+            <div id="user-info">
+                <!-- Здесь будет отображаться фамилия и инициалы пользователя -->
+            </div>
+
             <form class="login-form" id="login-form">
                 <div class="login-fields">
-                    <input type="email" id="email" name="login" placeholder="Email" required>
+                    <input type="email" id="email" name="login" placeholder="Логин" required>
                     <input type="password" id="password" name="password" placeholder="Пароль" required>
                 </div>
                 <div class="login-buttons">
@@ -27,25 +32,61 @@
                 </div>
             </form>
             <script>
-                document.getElementById('login-button').addEventListener('click', async () => {
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
+                document.addEventListener("DOMContentLoaded", () => {
+                    const token = localStorage.getItem('jwt');
+                    const userInfoElement = document.getElementById('user-info');
+                    const loginForm = document.getElementById('login-form');
 
-                    const response = await fetch('/api/auth/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, password })
-                    });
-
-                    if (response.ok) {
-                        const { token } = await response.json();
-                        localStorage.setItem('jwt', token); // Сохраняем токен
-                        alert('Успешный вход!');
-                    } else {
-                        alert('Ошибка входа!');
+                    if (token) {
+                        fetch('http://localhost:5047/api/auth/user', {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data && data.lastName && data.firstName) {
+                                    userInfoElement.innerHTML = `Добро пожаловать, ${data.lastName} ${data.firstName[0]}.`;
+                                    loginForm.style.display = 'none';
+                                }
+                            })
+                            .catch(() => {
+                                userInfoElement.innerHTML = 'Ошибка авторизации. Пожалуйста, войдите заново.';
+                            });
                     }
+
+                    document.getElementById('login-button').addEventListener('click', async () => {
+                        const email = document.getElementById('email').value.trim();
+                        const password = document.getElementById('password').value.trim();
+
+                        if (!email || !password) {
+                            alert("Заполните все поля!");
+                            return;
+                        }
+
+                        try {
+                            const response = await fetch('http://localhost:5047/api/auth/login', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email, password })
+                            });
+
+                            if (response.ok) {
+                                const { token, user } = await response.json();
+                                localStorage.setItem('jwt', token);
+                                userInfoElement.innerHTML = `Добро пожаловать, ${user.lastName} ${user.firstName[0]}.`;
+                                loginForm.style.display = 'none';
+                            } else {
+                                const errorData = await response.json();
+                                alert(errorData.message || 'Ошибка при входе');
+                            }
+                        } catch {
+                            alert("Не удалось подключиться к серверу.");
+                        }
+                    });
                 });
             </script>
+
 
         </div>
     </header>
