@@ -21,21 +21,25 @@
     <main>
         <section class="feedback-form">
             <h2>Напишите нам</h2>
-            <form action="../index.html" method="GET"> <!-- Укажите путь для обработки формы -->
+            <form action="/feedback/submit" method="POST">
                 <label for="name">Имя:</label>
                 <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
 
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
 
-                <label for="subject">Тема:</label>
-                <input type="text" id="subject" name="subject" placeholder="Введите тему сообщения" required>
+                <label for="theme">Тема:</label>
+                <input type="text" id="theme" name="theme" placeholder="Введите тему сообщения" required>
 
                 <label for="message">Сообщение:</label>
                 <textarea id="message" name="message" rows="5" placeholder="Введите ваше сообщение" required></textarea>
 
                 <button type="submit">Отправить</button>
             </form>
+
+
+            <script src="../Scripts/Feedback.js"></script>
+
         </section>
     </main>
 

@@ -104,6 +104,19 @@
         padding: 20px;
         display: none; /* Скрываем по умолчанию */
         }
+        .sort-container {
+            margin: 20px 0;
+        }
+
+        label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        #sort-options {
+            font-size: 16px;
+            padding: 5px;
+        }
 
         
 
@@ -114,17 +127,23 @@
         <div class="container">
             <a href="../index.html"><img src="../images/logo.jpg" class="logo"></a>
             <h1>Золотая Середина</h1>
-            <form class="login-form">
+
+            <div id="user-info">
+                <!-- Здесь будет отображаться фамилия и инициалы пользователя -->
+            </div>
+
+            <form class="login-form" id="login-form">
                 <div class="login-fields">
-                    <input type="text" name="login" placeholder="Логин" required>
-                    <input type="password" name="password" placeholder="Пароль" required>
+                    <input type="email" id="email" name="login" placeholder="Логин" required>
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
                 </div>
                 <div class="login-buttons">
-                    <button type="submit" class="button1">Войти</button>
-                    <button onclick="location.href='pages/registration.html'" class="button">Регистрация</button>
+                    <button type="button" id="login-button" class="button1">Войти</button>
+                    <button onclick="location.href='registration.html'" class="button">Регистрация</button>
                 </div>
             </form>
         </div>
+
     </header>
 
     <nav class="centered-nav">
@@ -155,115 +174,97 @@
 
             <section class="content">
                 <h2>Туры</h2>
+                <div class="sort-container" style="margin-bottom: 20px">
+                    <label for="sort-options">Сортировать по:</label>
+                    <select id="sort-options">
+                        <option value="alphabetical">По алфавиту</option>
+                        <option value="price-asc">По возрастанию стоимости</option>
+                        <option value="price-desc">По убыванию стоимости</option>
+                        <option value="mady-days">Многодневный тур</option>
+                        <option value="one-day">Однодневная экскурсия</option>
+                    </select>
+                </div>
                 <div class="loading-indicator">Загрузка туров...</div>
 
                 <div class="tour-container">
 
-                        <div class="tour-preview"></div>
-                        <div class="tour-preview"></div>
-                        <div class="tour-preview"></div>
+                    <div class="tour-preview"></div>
+                    <div class="tour-preview"></div>
+                    <div class="tour-preview"></div>
                 </div>
             </section>
         </div>
 
-        
+
 
 
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>&copy; 2024 Золотая Середина. <a href="privacy.html" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
 
     <div id="notification"></div>
-    <script>
-        function highlightText(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-            const searchTerm = document.getElementById('search-input').value;
-            const content = document.querySelector('.content'); // Получаем элемент с контентом
-            const notification = document.getElementById('notification'); // Элемент для уведомления
     
-            // Сначала убираем предыдущие выделения
-            clearHighlights(content);
-            notification.classList.remove('show'); // Скрываем уведомление
-    
-            // Теперь выделяем новый текст
-            if (searchTerm) {
-                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
-                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
-    
-                if (!matches) {
-                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
-                    // Показываем уведомление
-                    notification.classList.add('show'); // Добавляем класс для отображения
-                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
-                    setTimeout(() => {
-                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
-                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
-                    }, 2000); // Скрываем уведомление через 4 секунды
-                }
-    
-                // Если совпадения есть, просто выделяем текст
-                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
-            }
-        }
-    
-        function clearHighlights(container) {
-            // Удаляем выделение, если оно есть
-            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
-        }
-    </script>
 
     <script>
         // URL API для получения списка туров
         const apiUrl = 'http://localhost:5047/api/Tours'; // Замените на фактический URL API
         document.addEventListener('DOMContentLoaded', loadTours);
-        
-
         // Функция для загрузки туров и отображения их на странице
         async function loadTours() {
             const loadingIndicator = document.querySelector('.loading-indicator');
             const container = document.querySelector('.tour-container');
 
-            // Показываем индикатор загрузки
             loadingIndicator.style.display = 'block';
 
             try {
                 const response = await fetch(apiUrl);
                 const tours = await response.json();
 
-                container.innerHTML = ''; // Очищаем контейнер перед добавлением новых карточек
+                container.innerHTML = '';
 
-                // Генерация карточек для каждого тура
                 tours.forEach(tour => {
                     const tourCard = `
-                <div class="tour-preview">
+                <div class="tour-preview" data-category="${tour.tourCategory}" data-price="${tour.price}">
                     <a href="${tour.linkToCard}">
-                        <img src="${tour.picture}">
+                        <img src="${tour.picture}" alt="${tour.tourName}">
                         <h3>${tour.tourName}</h3>
                     </a>
                     <p>${tour.shortDescription}</p>
                     <div class="tour-details">
                         <p>Свободных мест: ${tour.amountofPlaces}</p>
-                        <p class="tour-price">Цена: ${tour.price.toLocaleString('ru-RU')} руб.</p>
+                        <p class="tour-category">Категория: ${tour.tourCategory}</p>
+                        <p class="tour-price">${tour.price.toLocaleString('ru-RU')} руб.</p>
                     </div>
                     <a href="${tour.linkToCard}" class="read-more">Подробнее</a>
                 </div>
             `;
                     container.innerHTML += tourCard;
                 });
+
+                // Оповещение о завершении загрузки
+                document.dispatchEvent(new Event("toursLoaded"));
             } catch (error) {
                 console.error('Ошибка при загрузке туров:', error);
                 container.innerHTML = '<p>Ошибка при загрузке данных. Пожалуйста, попробуйте позже.</p>';
             } finally {
-                // Скрываем индикатор загрузки
                 loadingIndicator.style.display = 'none';
             }
         }
 
+        //поиск
+        
+
+
+
+
 
     </script>
+
+    <script src="../Scripts/Auth.js"></script>
+    <script src="../Scripts/sortTours.js" defer></script>
 
 </body>
 </html>

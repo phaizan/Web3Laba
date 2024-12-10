@@ -2,6 +2,7 @@
 using back.Models;
 using System.Linq;
 using back.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -143,5 +144,19 @@ public class ToursController : ControllerBase
         }
     }
 
-    
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<Tour>>> SearchTours([FromQuery] string query)
+    {
+        if (string.IsNullOrEmpty(query))
+        {
+            return BadRequest("Query parameter is required.");
+        }
+
+        var tours = await _context.Tours
+            .Where(t => EF.Functions.Like(t.TourName, $"%{query}%"))
+            .ToListAsync();
+
+        return Ok(tours);
+
+    }
 }

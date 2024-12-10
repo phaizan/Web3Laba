@@ -45,8 +45,12 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 74.45vh; /* Высота контейнера для центрирования */
+    min-height: calc(100vh - 120px); /* Высота с учетом высоты заголовка и футера */
+    margin-top: 60px; /* Отступ сверху */
+    margin-bottom: 60px; /* Отступ снизу */
+    box-sizing: border-box; /* Учитываем отступы в размерах */
 }
+
 
 .registration-form {
     background-color: #c5e1a5; /* Светлый фон для формы */

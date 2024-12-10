@@ -120,27 +120,29 @@
             <a href="pages/1dayex.html">Однодневные экскурсии</a>
             <a href="pages/articles.html">Статьи</a>
             <a href="pages/feedback.html">Обратная связь</a>
-        
+
             <!-- Поле поиска -->
             <form class="search-form" onsubmit="highlightText(event)">
                 <input type="text" id="search-input" placeholder="Поиск по сайту" required>
                 <button type="submit" class="button">Поиск</button>
             </form>
-        
+
         </aside>
-        
+
         <section class="content">
             <h2>Добро пожаловать в "Золотую Середину"</h2>
             <p class="kareliya"><img src="images/zagorod.jpg" class="city-image"></p>
 
             <span class="opisanie">
-                <p>Наша туристическая компания предоставляет вам исключительные возможности для незабываемых путешествий, 
-                    где каждый момент наполнен яркими эмоциями и впечатлениями. Мы специализируемся на организации экскурсий и туров, которые гармонично сочетают 
+                <p>
+                    Наша туристическая компания предоставляет вам исключительные возможности для незабываемых путешествий,
+                    где каждый момент наполнен яркими эмоциями и впечатлениями. Мы специализируемся на организации экскурсий и туров, которые гармонично сочетают
                     в себе комфорт, безопасность и насыщенную программу. Путешествуйте с нами и открывайте для себя новые горизонты!
-                </p> 
-                <p>Мы тщательно отбираем направления и разрабатываем уникальные программы, чтобы они соответствовали самым разным предпочтениям и интересам 
-                    наших клиентов. Наша команда экспертов берет на себя все организационные вопросы — от выбора маршрута до мелких деталей поездки, обеспечивая 
-                    вам максимальное удобство и полное погружение в атмосферу отдыха. Вам не нужно беспокоиться ни о чем: все заботы по планированию мы берем на 
+                </p>
+                <p>
+                    Мы тщательно отбираем направления и разрабатываем уникальные программы, чтобы они соответствовали самым разным предпочтениям и интересам
+                    наших клиентов. Наша команда экспертов берет на себя все организационные вопросы — от выбора маршрута до мелких деталей поездки, обеспечивая
+                    вам максимальное удобство и полное погружение в атмосферу отдыха. Вам не нужно беспокоиться ни о чем: все заботы по планированию мы берем на
                     себя, чтобы вы могли наслаждаться каждым моментом!
                 </p>
             </span>
@@ -166,49 +168,98 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>&copy; 2024 Золотая Середина. <a href="pages/privacy.html" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
     <div id="notification"></div>
 
     <script>
-        function highlightText(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-            const searchTerm = document.getElementById('search-input').value;
-            const content = document.querySelector('.content'); // Получаем элемент с контентом
-            const notification = document.getElementById('notification'); // Элемент для уведомления
-    
-            // Сначала убираем предыдущие выделения
-            clearHighlights(content);
-            notification.classList.remove('show'); // Скрываем уведомление
-    
-            // Теперь выделяем новый текст
-            if (searchTerm) {
-                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
-                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
-    
-                if (!matches) {
-                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
-                    // Показываем уведомление
-                    notification.classList.add('show'); // Добавляем класс для отображения
-                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
-                    setTimeout(() => {
-                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
-                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
-                    }, 2000); // Скрываем уведомление через 4 секунды
+        document.addEventListener("DOMContentLoaded", () => {
+            const userInfoElement = document.getElementById('user-info');
+            const loginForm = document.getElementById('login-form');
+
+            // Получение заголовков с токеном
+            const getHeadersWithToken = () => {
+                const token = localStorage.getItem('jwt');
+                return token ? { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+            };
+
+            // Проверка токена и получение информации о пользователе
+            const checkTokenAndFetchUser = async () => {
+                const headers = getHeadersWithToken();
+                if (headers.Authorization) {
+                    try {
+                        const response = await fetch('http://localhost:5047/api/auth/user', { headers });
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data && data.lastName && data.firstName) {
+                                userInfoElement.innerHTML = `
+                                    Добро пожаловать, ${data.lastName} ${data.firstName[0]}. <br>
+                                    <div style="text-align: right; margin-top: 10px;">
+                                    <button id="logout-button" class="button1">Выход</button>
+                                </div>
+                                `;
+                                loginForm.style.display = 'none';
+                            }
+                        } else {
+                            localStorage.removeItem('jwt'); // Удаляем токен, если он больше недействителен
+                        }
+                    } catch {
+                        userInfoElement.innerHTML = 'Не удалось загрузить информацию о пользователе.';
+                    }
                 }
-    
-                // Если совпадения есть, просто выделяем текст
-                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
-            }
-        }
-    
-        function clearHighlights(container) {
-            // Удаляем выделение, если оно есть
-            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
-        }
+            };
+
+            // Обработчик входа
+            document.getElementById('login-button').addEventListener('click', async () => {
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                if (!email || !password) {
+                    alert("Заполните все поля!");
+                    return;
+                }
+
+                try {
+                    const response = await fetch('http://localhost:5047/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        console.error("Ошибка:", error);
+                        throw new Error(error.message || "Ошибка подключения");
+                    }
+
+                    const data = await response.json();
+                    console.log("Успешный вход:", data);
+                    localStorage.setItem('jwt', data.token); // Сохраняем токен в localStorage
+
+                    // После успешного входа выполняем повторную проверку
+                    checkTokenAndFetchUser();
+                } catch (error) {
+                    console.error("Ошибка запроса:", error);
+                    alert("Не удалось подключиться к серверу.");
+                }
+            });
+
+            // Обработчик выхода
+            document.addEventListener('click', (event) => {
+                if (event.target && event.target.id === 'logout-button') {
+                    localStorage.removeItem('jwt'); // Удаляем токен
+                    userInfoElement.innerHTML = ''; // Очищаем информацию о пользователе
+                    loginForm.style.display = 'block'; // Показываем форму входа
+                }
+            });
+
+            // Выполнение проверки токена при загрузке
+            checkTokenAndFetchUser();
+        });
     </script>
 
-    
+
+
 </body>
 </html>
