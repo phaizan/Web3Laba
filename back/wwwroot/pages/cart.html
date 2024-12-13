@@ -25,11 +25,11 @@
                 </div>
                 <div class="login-buttons">
                     <button type="button" id="login-button" class="button1">Войти</button>
-                    <button onclick="location.href='pages/registration.html'" class="button">Регистрация</button>
+                    <button onclick="location.href='registration.html'" class="button">Регистрация</button>
                 </div>
             </form>
 
-            <script src="Scripts/Auth.js"></script>
+            <script src="../Scripts/Auth.js"></script>
         </div>
     </header>
 
@@ -87,13 +87,81 @@
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
 
-    <script>// Пример данных для корзины (можно заменить на загрузку из API или локального хранилища)
-        let userId = 30; // Текущий пользователь (можно динамически получать ID)
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+
+    <script>
+        function getUserId() {
+
+            const token = localStorage.getItem('jwt');
+            if (!token) {
+                console.log('Токен не найден в localStorage');
+                return null;
+            }
+
+            try {
+
+                // Пример с использованием jwt-decode
+
+                const decodedToken = jwt_decode(token);
+                console.log('Декодированный токен:', decodedToken);
+                return decodedToken.id; // Возвращаем userId из токена
+            } catch (e) {
+                console.error('Ошибка декодирования токена:', e);
+                return null;
+            }
+        }
+
+        // Функция для получения userId с сервера, если его нет в токене
+        async function fetchUserIdFromServer() {
+            const token = localStorage.getItem('jwt');
+            if (!token) {
+                console.log('Токен не найден при запросе userId с сервера');
+                return null;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5047/api/auth/user', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Получены данные с сервера:', data);
+                    return data.userId; // Возвращаем userId, полученный с сервера
+                } else {
+                    console.error('Ошибка при получении данных с сервера:', response.statusText);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Не удалось получить userId с сервера:', error);
+                return null;
+            }
+        }
+
+        // Функция, которая сначала проверяет localStorage, а если userId нет, то запрашивает его с сервера
+        async function getUserIdWithFallback() {
+            let userId = getUserId();
+            if (!userId) {
+                console.log('userId не найден в токене, пытаемся получить с сервера');
+                userId = await fetchUserIdFromServer();
+            }
+            return userId;
+        }
 
         async function loadCart(userId) {
             try {
                 const response = await fetch(`/api/cart/${userId}`);
-                if (!response.ok) throw new Error("Failed to fetch cart items");
+                if (!response.ok) {
+                    // Если сервер возвращает 404, обрабатываем это как пустую корзину
+                    if (response.status === 404) {
+                        renderCart([]);
+                        return;
+                    }
+                    throw new Error("Failed to fetch cart items");
+                }
 
                 const cartData = await response.json();
                 renderCart(cartData);
@@ -103,27 +171,38 @@
             }
         }
 
+
         function renderCart(cartData) {
             const cartTable = document.querySelector('#cart-items');
             const totalPriceEl = document.querySelector('#total-price');
+            const checkoutButton = document.querySelector('#checkout-button');
             let total = 0;
 
+            // Очистка таблицы перед рендерингом
             cartTable.innerHTML = '';
 
             if (cartData.length === 0) {
+                // Если корзина пуста, выводим сообщение
                 cartTable.innerHTML = "<tr><td colspan='5'>Корзина пуста</td></tr>";
-                document.querySelector('#checkout-button').disabled = true;
+                totalPriceEl.textContent = "0";
+                checkoutButton.disabled = true; // Отключаем кнопку оформления заказа
                 return;
             }
 
+            // Если корзина не пуста, рендерим элементы
             cartData.forEach(item => {
+                console.log(item);
                 const itemTotal = item.quantity * item.totalPrice;
                 total += itemTotal;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
             <td>${item.tourName}</td>
-            <td>${item.quantity}</td>
+            <td>
+                <button class="quantity-button decrease" data-id="${item.id}">-</button>
+                <span class="quantity-value">${item.quantity}</span>
+                <button class="quantity-button increase" data-id="${item.id}">+</button>
+            </td>
             <td>${item.totalPrice.toLocaleString('ru-RU')} руб.</td>
             <td>${itemTotal.toLocaleString('ru-RU')} руб.</td>
             <td><button class="button remove-button" data-id="${item.id}">Удалить</button></td>
@@ -131,24 +210,64 @@
                 cartTable.appendChild(row);
             });
 
+            // Обновляем общую цену и активируем кнопку оформления
             totalPriceEl.textContent = total.toLocaleString('ru-RU');
-            document.querySelector('#checkout-button').disabled = false;
+            checkoutButton.disabled = false;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadCart(userId);
 
-            document.querySelector('#cart-container').addEventListener('click', event => {
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userId = await getUserIdWithFallback(); // This is now valid inside an async function.
+            await loadCart(userId); // Ensure loadCart is awaited as it involves asynchronous operations.
+
+            document.querySelector('#cart-container').addEventListener('click', async event => {
+                const userId = await getUserIdWithFallback();
                 if (event.target.classList.contains('remove-button')) {
                     const cartItemId = event.target.dataset.id;
                     removeCartItem(userId, cartItemId);
+                } else if (event.target.classList.contains('quantity-button')) {
+                    const cartItemId = event.target.dataset.id;
+                    const action = event.target.classList.contains('increase') ? 'increase' : 'decrease';
+                    updateCartItemQuantity(userId, cartItemId, action);
                 }
             });
 
-            document.querySelector('#checkout-button').addEventListener('click', async () => {
-                alert('Заказ оформлен!'); // Можно заменить на вызов API
-            });
+            async function updateCartItemQuantity(userId, cartItemId, action) {
+                try {
+                    const response = await fetch(`/api/cart/${userId}/${cartItemId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ quantity: action === 'increase' ? 1 : -1 })
+                    });
+                    if (!response.ok) throw new Error("Failed to update cart item");
+
+                    await loadCart();
+                } catch (error) {
+                    console.error("Error updating cart item:", error);
+                }
+            }
+
+            async function removeCartItem(userId, cartItemId) {
+                try {
+                    const response = await fetch(`/api/cart/${userId}/${cartItemId}`, {
+                        method: 'DELETE'
+                    });
+                    if (!response.ok) throw new Error("Failed to remove cart item");
+
+                    await loadCart();
+                    // Перезагрузка текущей страницы
+                    location.reload();
+
+                } catch (error) {
+                    console.error("Error removing cart item:", error);
+                }
+            }
+
         });
+
     </script>
+
+    <script src="../Scripts/Auth.js"></script>
 </body>
 </html>

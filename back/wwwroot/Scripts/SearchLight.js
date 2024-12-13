@@ -112,9 +112,15 @@
                 throw new Error("Ошибка при добавлении в корзину.");
             }
 
-            const result = await response.json();
-            alert("Товар успешно добавлен в корзину!");
-            console.log("Добавлено в корзину:", result);
+            const textResponse = await response.text(); // Получаем текстовый ответ
+            console.log("Добавлено в корзину:", textResponse);
+
+            // Проверяем текстовый ответ
+            if (textResponse === "Item added to cart.") {
+                alert("Товар успешно добавлен в корзину!");
+            } else {
+                console.warn("Неожиданный ответ от сервера:", textResponse);
+            }
         } catch (error) {
             console.error("Ошибка:", error);
             alert("Не удалось добавить товар в корзину.");

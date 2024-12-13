@@ -67,6 +67,7 @@ namespace back.Controllers
             if (existingItem != null)
             {
                 existingItem.Quantity += newCartItem.Quantity;
+                existingItem.TotalPrice = existingItem.Quantity * existingItem.Tour.Price; // Обновление цены
             }
             else
             {
@@ -76,12 +77,16 @@ namespace back.Controllers
 
                 var cartItem = new CartItem
                 {
+                    Tour = tour,
                     TourId = newCartItem.TourId,
                     Quantity = newCartItem.Quantity,
+                    TotalPrice = newCartItem.Quantity * tour.Price, // Расчет итоговой цены
                     Cart = cart
                 };
                 cart.CartItems.Add(cartItem);
+                _dbContext.CartItems.Add(cartItem);
             }
+
 
             await _dbContext.SaveChangesAsync();
             return Ok("Item added to cart.");
@@ -92,21 +97,33 @@ namespace back.Controllers
         [HttpPut("{userId}/{cartItemId}")]
         public async Task<IActionResult> UpdateCartItem(int userId, int cartItemId, [FromBody] CartItemDto updatedCartItem)
         {
-            if (updatedCartItem == null || updatedCartItem.Quantity <= 0)
-                return BadRequest("Invalid item details.");
-
             var cartItem = await _dbContext.CartItems
+                .Include(ci => ci.Tour) // Добавьте Include для Tour
                 .Include(ci => ci.Cart)
                 .FirstOrDefaultAsync(ci => ci.Id == cartItemId && ci.Cart.UserId == userId);
 
             if (cartItem == null)
                 return NotFound("Item not found in the cart.");
 
-            cartItem.Quantity = updatedCartItem.Quantity;
+            cartItem.Quantity += updatedCartItem.Quantity;
+
+            if (cartItem.Quantity > 0)
+            {
+                 cartItem.TotalPrice = cartItem.Quantity * cartItem.Tour.Price; // Пересчет цены
+                _dbContext.CartItems.Update(cartItem);
+            }
+            else
+            {
+                _dbContext.CartItems.Remove(cartItem);
+            }
+
             await _dbContext.SaveChangesAsync();
 
             return Ok("Cart item updated.");
         }
+
+
+
 
         // DELETE: api/cart/{userId}/{cartItemId}
         [HttpDelete("{userId}/{cartItemId}")]

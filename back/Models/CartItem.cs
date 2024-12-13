@@ -16,6 +16,6 @@
         public int Quantity { get; set; }
 
         // Итоговая стоимость для конкретного тура
-        public decimal TotalPrice => Tour.Price * Quantity;
+        public decimal TotalPrice { get; set; }
     }
 }
