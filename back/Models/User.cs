@@ -16,6 +16,7 @@ namespace back.Models
         [Required]
         public string Password { get; set; }
 
+        virtual public Cart? Cart { get; set; }
         
         
 

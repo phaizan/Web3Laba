@@ -14,5 +14,7 @@
             public string DepartureCity { get; set; }
             public DateTime StartDate { get; set; }
             public DateTime FinishDate { get; set; }
+
+            public ICollection<CartItem>? CartItems { get; set; }
     }
 }

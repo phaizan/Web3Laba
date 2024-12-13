@@ -1,0 +1,154 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&family=Playfair+Display&family=Raleway&family=Oswald&family=Merriweather&family=Roboto&family=Source+Sans+Pro&family=Lobster&family=Inconsolata&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Туроператор Золотая Середина</title>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html"><img src="../images/logo.jpg" class="logo"></a>
+            <h1>Золотая Середина</h1>
+
+            <div id="user-info">
+                <!-- Здесь будет отображаться фамилия и инициалы пользователя -->
+            </div>
+
+            <form class="login-form" id="login-form">
+                <div class="login-fields">
+                    <input type="email" id="email" name="login" placeholder="Логин" required>
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="login-buttons">
+                    <button type="button" id="login-button" class="button1">Войти</button>
+                    <button onclick="location.href='pages/registration.html'" class="button">Регистрация</button>
+                </div>
+            </form>
+
+            <script src="Scripts/Auth.js"></script>
+        </div>
+    </header>
+
+    <nav class="centered-nav">
+        <ul class="nav-links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="tours.html">Туры</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <aside class="sidebar">
+            <a href="buying.html">Как купить</a>
+            <a href="1dayex.html">Однодневные экскурсии</a>
+            <a href="articles.html">Статьи</a>
+            <a href="feedback.html">Обратная связь</a>
+
+            <!-- Поле поиска -->
+            <form class="search-form" onsubmit="highlightText(event)">
+                <input type="text" id="search-input" placeholder="Поиск по сайту" required>
+                <button type="submit" class="button">Поиск</button>
+            </form>
+        </aside>
+
+        <section class="content">
+            <h2>Корзина</h2>
+            <div id="cart-container">
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>Название тура</th>
+                            <th>Количество мест</th>
+                            <th>Цена за место</th>
+                            <th>Итоговая цена</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Здесь динамически будут добавляться товары -->
+                    </tbody>
+                </table>
+
+                <div class="cart-summary">
+                    <p><strong>Общая сумма: </strong><span id="total-price">0</span> руб.</p>
+                    <button class="button" id="checkout-button">Оформить заказ</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Золотая Середина. <a href="pages/privacy.html" style="color: white">Политика конфиденциальности</a></p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
+    </footer>
+
+    <script>// Пример данных для корзины (можно заменить на загрузку из API или локального хранилища)
+        let userId = 30; // Текущий пользователь (можно динамически получать ID)
+
+        async function loadCart(userId) {
+            try {
+                const response = await fetch(`/api/cart/${userId}`);
+                if (!response.ok) throw new Error("Failed to fetch cart items");
+
+                const cartData = await response.json();
+                renderCart(cartData);
+            } catch (error) {
+                console.error("Error loading cart:", error);
+                document.querySelector('#cart-items').innerHTML = "<tr><td colspan='5'>Ошибка загрузки корзины</td></tr>";
+            }
+        }
+
+        function renderCart(cartData) {
+            const cartTable = document.querySelector('#cart-items');
+            const totalPriceEl = document.querySelector('#total-price');
+            let total = 0;
+
+            cartTable.innerHTML = '';
+
+            if (cartData.length === 0) {
+                cartTable.innerHTML = "<tr><td colspan='5'>Корзина пуста</td></tr>";
+                document.querySelector('#checkout-button').disabled = true;
+                return;
+            }
+
+            cartData.forEach(item => {
+                const itemTotal = item.quantity * item.totalPrice;
+                total += itemTotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${item.tourName}</td>
+            <td>${item.quantity}</td>
+            <td>${item.totalPrice.toLocaleString('ru-RU')} руб.</td>
+            <td>${itemTotal.toLocaleString('ru-RU')} руб.</td>
+            <td><button class="button remove-button" data-id="${item.id}">Удалить</button></td>
+        `;
+                cartTable.appendChild(row);
+            });
+
+            totalPriceEl.textContent = total.toLocaleString('ru-RU');
+            document.querySelector('#checkout-button').disabled = false;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart(userId);
+
+            document.querySelector('#cart-container').addEventListener('click', event => {
+                if (event.target.classList.contains('remove-button')) {
+                    const cartItemId = event.target.dataset.id;
+                    removeCartItem(userId, cartItemId);
+                }
+            });
+
+            document.querySelector('#checkout-button').addEventListener('click', async () => {
+                alert('Заказ оформлен!'); // Можно заменить на вызов API
+            });
+        });
+    </script>
+</body>
+</html>

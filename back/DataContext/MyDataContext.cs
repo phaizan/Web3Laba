@@ -9,6 +9,8 @@ namespace back.DataContext
         public DbSet<User> Users { get; set; }
         public DbSet<Tour> Tours { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql("Server=localhost;Port=3306;Database=travel_agency;User=root;Password=yaprogerUmnik();",

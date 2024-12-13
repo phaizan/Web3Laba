@@ -20,6 +20,7 @@
         userInfoElement.innerHTML = `
                                 Добро пожаловать, ${data.lastName} ${data.firstName[0]}. <br>
                                 <div style="text-align: right; margin-top: 10px;">
+                                <a href="pages/cart.html"><img src="images/cart.png" style="height: 64px;"></a>
                                 <button id="logout-button" class="button1">Выход</button>
                                 </div>
                                 `;
@@ -28,7 +29,6 @@
                             }
                         } else {
         localStorage.removeItem('jwt'); // Удаляем токен, если он больше недействителен
-    userInfoElement.innerHTML = 'Ошибка авторизации. Пожалуйста, войдите заново.';
                         }
                     } catch {
         userInfoElement.innerHTML = 'Не удалось загрузить информацию о пользователе.';

@@ -32,6 +32,8 @@ public class AuthController : ControllerBase
             return BadRequest("Пользователь с таким Email уже существует.");
         }
 
+        user.Cart = null;
+
         // Хэшируем пароль перед сохранением
         user.Password = HashPassword(user.Password);
         try
