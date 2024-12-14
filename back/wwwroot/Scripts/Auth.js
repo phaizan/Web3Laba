@@ -19,8 +19,8 @@ return token ? {'Authorization': `Bearer ${token}`, 'Content-Type': 'application
                     if (data && data.lastName && data.firstName) {
                         userInfoElement.innerHTML = `
                             Добро пожаловать, ${data.lastName} ${data.firstName[0]}. <br>
-                            <div style="text-align: right; margin-top: 10px;">
-                            <a href="cart.html"><img src="../images/cart.png" style="height: 64px;"/></a>
+                            <div style="text-align: right; margin-top: 30px; ">
+                            <a href="pages/cart.html"><img src="../images/cart.png" style="position: absolute; top: 55px; right: 150px; height: 70px; "/></a>
                             <button id="logout-button" class="button1">Выход</button>
                             </div>
                             `;

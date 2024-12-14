@@ -83,7 +83,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. <a href="pages/privacy.html" style="color: white">Политика конфиденциальности</a></p>
+        <p>&copy; 2024 Золотая Середина. <a href="../Политика обработки персональных данных.docx" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
 
@@ -197,16 +197,16 @@
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-            <td>${item.tourName}</td>
-            <td>
-                <button class="quantity-button decrease" data-id="${item.id}">-</button>
-                <span class="quantity-value">${item.quantity}</span>
-                <button class="quantity-button increase" data-id="${item.id}">+</button>
-            </td>
-            <td>${item.totalPrice.toLocaleString('ru-RU')} руб.</td>
-            <td>${itemTotal.toLocaleString('ru-RU')} руб.</td>
-            <td><button class="button remove-button" data-id="${item.id}">Удалить</button></td>
-        `;
+                <td>${item.tourName}</td>
+                <td>
+                    <button class="quantity-button decrease" data-id="${item.id}">-</button>
+                    <span class="quantity-value">${item.quantity}</span>
+                    <button class="quantity-button increase" data-id="${item.id}">+</button>
+                </td>
+                <td>${item.totalPrice.toLocaleString('ru-RU')} руб.</td>
+                <td>${itemTotal.toLocaleString('ru-RU')} руб.</td>
+                <td><button class="button remove-button" data-id="${item.id}">Удалить</button></td>
+            `;
                 cartTable.appendChild(row);
             });
 
