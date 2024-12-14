@@ -16,14 +16,18 @@
         <div class="container">
             <a href="../index.html"><img src="../images/logo.jpg" class="logo"></a>
             <h1>Золотая Середина</h1>
-            <form class="login-form">
+            <div id="user-info">
+                <!-- Здесь будет отображаться фамилия и инициалы пользователя -->
+            </div>
+
+            <form class="login-form" id="login-form">
                 <div class="login-fields">
-                    <input type="text" name="login" placeholder="Логин" required>
-                    <input type="password" name="password" placeholder="Пароль" required>
+                    <input type="email" id="email" name="login" placeholder="Логин" required>
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
                 </div>
                 <div class="login-buttons">
-                    <button type="submit" class="button1">Войти</button>
-                    <button onclick="location.href='../pages/registration.html'" class="button">Регистрация</button>
+                    <button type="button" id="login-button" class="button1">Войти</button>
+                    <button onclick="location.href='registration.html'" class="button">Регистрация</button>
                 </div>
             </form>
         </div>
@@ -41,7 +45,6 @@
     <main>
         <aside class="sidebar">
             <a href="../pages/buying.html">Как купить</a>
-            <a href="../pages/1dayex.html">Однодневные экскурсии</a>
             <a href="../pages/articles.html">Статьи</a>
             <a href="../pages/feedback.html">Обратная связь</a>
 
@@ -55,12 +58,12 @@
         <section class="content">
             <h2>О компании</h2>
             <p>
-                Туристическая компания "Золотая Середина" осуществляет туроператорскую деятельность с 2004 года. 
-                Мы являемся официальным туроператором и внесены в Единый федеральный реестр туроператоров под номером РТО 006197. 
+                Туристическая компания "Золотая Середина" осуществляет туроператорскую деятельность с 2004 года.
+                Мы являемся официальным туроператором и внесены в Единый федеральный реестр туроператоров под номером РТО 006197.
                 Деятельность нашей фирмы одобрена Федеральным агентством по туризму РФ и застрахована.
             </p>
             <p>
-                Мы проводим экскурсии из Москвы и 30 городов Подмосковья. Экскурсии организуются профессиональными экскурсоводами, 
+                Мы проводим экскурсии из Москвы и 30 городов Подмосковья. Экскурсии организуются профессиональными экскурсоводами,
                 а для программы выбираются только самые интересные достопримечательности.
             </p>
             <a href="https://goldenmiddle.ru/about_company"><img src="../images/map.jpg"></a>
@@ -68,48 +71,13 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>&copy; 2024 Золотая Середина. <a href="privacy.html" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
 
+
     <div id="notification"></div>
 
-    <script>
-        function highlightText(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-            const searchTerm = document.getElementById('search-input').value;
-            const content = document.querySelector('.content'); // Получаем элемент с контентом
-            const notification = document.getElementById('notification'); // Элемент для уведомления
-    
-            // Сначала убираем предыдущие выделения
-            clearHighlights(content);
-            notification.classList.remove('show'); // Скрываем уведомление
-    
-            // Теперь выделяем новый текст
-            if (searchTerm) {
-                const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
-                const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
-    
-                if (!matches) {
-                    notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
-                    // Показываем уведомление
-                    notification.classList.add('show'); // Добавляем класс для отображения
-                    notification.style.display = 'block'; // Убедитесь, что уведомление видно
-                    setTimeout(() => {
-                        notification.classList.remove('show'); // Убираем класс, чтобы скрыть
-                        setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
-                    }, 2000); // Скрываем уведомление через 4 секунды
-                }
-    
-                // Если совпадения есть, просто выделяем текст
-                content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
-            }
-        }
-    
-        function clearHighlights(container) {
-            // Удаляем выделение, если оно есть
-            container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');
-        }
-    </script>
+    <script src="../Scripts/Auth.js"></script>
 </body>
 </html>

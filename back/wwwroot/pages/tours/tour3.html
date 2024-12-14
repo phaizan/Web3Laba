@@ -49,17 +49,7 @@
                 margin-top: 20px;
             }
 
-        .book-button {
-            display: inline-block;
-            padding: 10px 10px;
-            width: 150px;
-            background-color: #f4b841;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
+        
 
 
         .tour-info .book-button:hover {
@@ -82,14 +72,18 @@
         <div class="container">
             <a href="../../index.html"><img src="../../images/logo.jpg" class="logo"></a>
             <h1>Золотая Середина</h1>
-            <form class="login-form">
+            <div id="user-info">
+                <!-- Здесь будет отображаться фамилия и инициалы пользователя -->
+            </div>
+
+            <form class="login-form" id="login-form">
                 <div class="login-fields">
-                    <input type="text" name="login" placeholder="Логин" required>
-                    <input type="password" name="password" placeholder="Пароль" required>
+                    <input type="email" id="email" name="login" placeholder="Логин" required>
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
                 </div>
                 <div class="login-buttons">
-                    <button type="submit" class="button1">Войти</button>
-                    <button onclick="location.href='../registration.html'" class="button">Регистрация</button>
+                    <button type="button" id="login-button" class="button1">Войти</button>
+                    <button onclick="location.href='registration.html'" class="button">Регистрация</button>
                 </div>
             </form>
         </div>
@@ -109,7 +103,6 @@
             <!-- Sidebar -->
             <aside class="sidebar">
                 <a href="../buying.html">Как купить</a>
-                <a href="../1dayex.html">Однодневные экскурсии</a>
                 <a href="../articles.html">Статьи</a>
                 <a href="../feedback.html">Обратная связь</a>
 
@@ -129,7 +122,7 @@
                 <!-- Главный блок с изображением и характеристиками -->
                 <div class="tour-content">
                     <div class="gallery-container">
-                        <img id="tour-image" src="../../images/tou.jpg" alt="Тур" class="tour-image">
+                        <img id="tour-image" src="../../images/tour3.jpg" alt="Тур" class="tour-image">
                     </div>
                     <div class="tour-info">
                         <p><strong>Город отправления:</strong> <span id="tour-departure">...</span></p>
@@ -137,7 +130,8 @@
                         <p><strong>Дата прибытия:</strong> <span id="tour-end-date">...</span></p>
                         <p><strong>Свободных мест:</strong> <span id="tour-places">...</span></p>
                         <p><strong>Цена:</strong> <span id="tour-price">...</span> руб.</p>
-                        <a href="#" class="book-button">Забронировать</a>
+                        <button class="add-to-cart" data-tour-id="3">Добавить в корзину</button>
+
                     </div>
                 </div>
 
@@ -218,8 +212,10 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>&copy; 2024 Золотая Середина. <a href="../../Политика обработки персональных данных.pdf" style="color: white">Политика конфиденциальности</a></p>
+        <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
+
 
     <script>
         const apiUrl = 'http://localhost:5047/api/Tours';
@@ -250,5 +246,10 @@
 
         document.addEventListener("DOMContentLoaded", loadTour);
     </script>
+    <script src="../../Scripts/Auth2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+    <script src="../../Scripts/AddTourInside.js"></script>
+
 </body>
 </html>

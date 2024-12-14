@@ -45,7 +45,6 @@
     <main>
         <aside class="sidebar">
             <a href="buying.html">Как купить</a>
-            <a href="1dayex.html">Однодневные экскурсии</a>
             <a href="articles.html">Статьи</a>
             <a href="feedback.html">Обратная связь</a>
 
@@ -175,45 +174,41 @@
         function renderCart(cartData) {
             const cartTable = document.querySelector('#cart-items');
             const totalPriceEl = document.querySelector('#total-price');
-            const checkoutButton = document.querySelector('#checkout-button');
             let total = 0;
 
-            // Очистка таблицы перед рендерингом
             cartTable.innerHTML = '';
 
             if (cartData.length === 0) {
-                // Если корзина пуста, выводим сообщение
                 cartTable.innerHTML = "<tr><td colspan='5'>Корзина пуста</td></tr>";
-                totalPriceEl.textContent = "0";
-                checkoutButton.disabled = true; // Отключаем кнопку оформления заказа
+                document.querySelector('#checkout-button').disabled = true;
                 return;
             }
 
-            // Если корзина не пуста, рендерим элементы
             cartData.forEach(item => {
                 console.log(item);
-                const itemTotal = item.quantity * item.totalPrice;
-                total += itemTotal;
+
+                // `item.totalPrice` уже содержит итоговую стоимость для данного количества мест
+                total += item.totalPrice;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                <td>${item.tourName}</td>
-                <td>
-                    <button class="quantity-button decrease" data-id="${item.id}">-</button>
-                    <span class="quantity-value">${item.quantity}</span>
-                    <button class="quantity-button increase" data-id="${item.id}">+</button>
-                </td>
-                <td>${item.totalPrice.toLocaleString('ru-RU')} руб.</td>
-                <td>${itemTotal.toLocaleString('ru-RU')} руб.</td>
-                <td><button class="button remove-button" data-id="${item.id}">Удалить</button></td>
-            `;
+            <td>${item.tourName}</td>
+            <td>
+                <button class="quantity-button decrease" data-id="${item.id}">-</button>
+                <span class="quantity-value">${item.quantity}</span>
+                <button class="quantity-button increase" data-id="${item.id}">+</button>
+            </td>
+            <td>${(item.totalPrice / item.quantity).toLocaleString('ru-RU')} руб.</td>
+            <td>${item.totalPrice.toLocaleString('ru-RU')} руб.</td>
+            <td><button class="button remove-button" data-id="${item.id}">Удалить</button></td>
+        `;
                 cartTable.appendChild(row);
             });
 
-            // Обновляем общую цену и активируем кнопку оформления
             totalPriceEl.textContent = total.toLocaleString('ru-RU');
-            checkoutButton.disabled = false;
+            document.querySelector('#checkout-button').disabled = false;
         }
+
 
 
 
@@ -242,7 +237,7 @@
                     });
                     if (!response.ok) throw new Error("Failed to update cart item");
 
-                    await loadCart();
+                    await loadCart(userId);
                 } catch (error) {
                     console.error("Error updating cart item:", error);
                 }
@@ -255,7 +250,7 @@
                     });
                     if (!response.ok) throw new Error("Failed to remove cart item");
 
-                    await loadCart();
+                    await loadCart(userId);
                     // Перезагрузка текущей страницы
                     location.reload();
 

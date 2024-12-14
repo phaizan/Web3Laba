@@ -50,6 +50,7 @@ namespace back.Controllers
 
             var cart = await _dbContext.Carts
                 .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Tour)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)

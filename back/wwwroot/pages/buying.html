@@ -41,7 +41,7 @@
             <a href="1dayex.html">Однодневные экскурсии</a>
             <a href="articles.html">Статьи</a>
             <a href="feedback.html">Обратная связь</a>
-            
+
             <!-- Поле поиска -->
             <form class="search-form" onsubmit="highlightText(event)">
                 <input type="text" id="search-input" placeholder="Поиск по сайту" required>
@@ -52,9 +52,9 @@
         <section class="content">
             <h2>Как купить</h2>
             <p>
-                Чтобы поехать на <a href="1dayex.html">сборные 1-дневные экскурсии</a> или <a href="tours.html">многодневные туры на 2 и более дней</a>, 
-                нужно записаться на сайте или по телефону, внести предоплату 
-                и дождаться звонка менеджера накануне выезда с информацией о номере автобуса и 
+                Чтобы поехать на <a href="1dayex.html">сборные 1-дневные экскурсии</a> или <a href="tours.html">многодневные туры на 2 и более дней</a>,
+                нужно записаться на сайте или по телефону, внести предоплату
+                и дождаться звонка менеджера накануне выезда с информацией о номере автобуса и
                 мест в автобусе.<br>
                 Оплатить поездку можно любым удобным для вас способом.
             </p>
@@ -84,9 +84,10 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. Все права защищены.</p>
+        <p>&copy; 2024 Золотая Середина. <a href="privacy.html" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
+
 
     <div id="notification"></div>
 
@@ -96,16 +97,16 @@
             const searchTerm = document.getElementById('search-input').value;
             const content = document.querySelector('.content'); // Получаем элемент с контентом
             const notification = document.getElementById('notification'); // Элемент для уведомления
-    
+
             // Сначала убираем предыдущие выделения
             clearHighlights(content);
             notification.classList.remove('show'); // Скрываем уведомление
-    
+
             // Теперь выделяем новый текст
             if (searchTerm) {
                 const regex = new RegExp(`(${searchTerm})`, 'gi'); // Регулярное выражение для поиска
                 const matches = content.innerHTML.match(regex); // Проверяем, есть ли совпадения
-    
+
                 if (!matches) {
                     notification.textContent = 'Ничего не найдено'; // Сообщение, если совпадений нет
                     // Показываем уведомление
@@ -116,12 +117,12 @@
                         setTimeout(() => notification.style.display = 'none', 500); // Ждем окончания анимации и скрываем
                     }, 2000); // Скрываем уведомление через 4 секунды
                 }
-    
+
                 // Если совпадения есть, просто выделяем текст
                 content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
             }
         }
-    
+
         function clearHighlights(container) {
             // Удаляем выделение, если оно есть
             container.innerHTML = container.innerHTML.replace(/<span class="highlight">(.*?)<\/span>/g, '$1');

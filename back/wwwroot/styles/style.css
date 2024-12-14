@@ -2,6 +2,24 @@
     font-family: 'Montserrat', sans-serif;
 
 }
+
+body > main > div > section > div.tour-content > div.tour-info > button {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #f4b841;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+
+
+
+    .tour-info .add-to-cart:hover {
+        background-color: #d4952f;
+    }
+
 body {
     margin: 0;
     padding: 0;

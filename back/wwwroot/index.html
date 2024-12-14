@@ -8,6 +8,96 @@
     <title>Туроператор Золотая Середина</title>
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <style>
+        /* Контейнер для галереи */
+        .gallery-container {
+            position: relative;
+            width: 90%;
+            height: 400px; /* Фиксированная высота */
+            margin: auto;
+            overflow: hidden; /* Скрывает изображения, которые выходят за пределы контейнера */
+            margin-bottom: 50px;
+        }
+
+        /* Изображения слайдера */
+        .gallery-slides {
+            width: 100%;
+            height: 100%; /* Подгоняет высоту под контейнер */
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0; /* Изначально все слайды скрыты */
+            visibility: hidden; /* Слайды невидимы */
+            transition: opacity 1s ease-in-out, visibility 0s 1s; /* Плавная анимация */
+        }
+
+
+            /* Изображения слайдера */
+            .gallery-slides img {
+                width: 100%;
+                height: 100%; /* Подгоняет высоту под контейнер */
+                object-fit: cover; /* Обеспечивает правильную обрезку изображений */
+                object-position: center center; /* Обрезка будет происходить по центру */
+            }
+
+            /* Изображение, которое отображается */
+            .gallery-slides.active {
+                opacity: 1;
+                visibility: visible; /* Делает слайд видимым */
+                transition: opacity 1s ease-in-out, visibility 0s 0s; /* Смена только opacity и visibility */
+            }
+
+        /* Для кнопок управления слайдами */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            transform: translateY(-50%);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            .prev:hover, .next:hover {
+                background-color: rgba(190, 190, 190, 0.253);
+            }
+
+        /* Индикаторы (точки) */
+        .gallery-indicators {
+            position: absolute;
+            bottom: -850px;
+            left: 60%;
+            transform: translateX(-50%);
+        }
+
+            .gallery-indicators span {
+                cursor: pointer;
+                height: 15px;
+                width: 15px;
+                margin: 0 2px;
+                background-color: #a5d6a7;
+                border-radius: 50%;
+                display: inline-block;
+                transition: background-color 0.6s ease;
+            }
+
+            .gallery-indicators .active {
+                background-color: #388e3c;
+            }
+
+            .gallery-indicators span:hover {
+                background-color: #103813;
+            }
+
+
     </style>
 </head>
 <body>
@@ -31,9 +121,6 @@
                 </div>
             </form>
 
-            <script src="Scripts/Auth.js"></script>
-
-
         </div>
     </header>
 
@@ -49,7 +136,6 @@
     <main>
         <aside class="sidebar">
             <a href="pages/buying.html">Как купить</a>
-            <a href="pages/1dayex.html">Однодневные экскурсии</a>
             <a href="pages/articles.html">Статьи</a>
             <a href="pages/feedback.html">Обратная связь</a>
 
@@ -96,6 +182,35 @@
                 <li>Подобрать круиз по рекам России.</li>
                 <li>Заказать прием Вашей группы в городах России.</li>
             </ul>
+            <div class="gallery-container">
+
+                <div class="gallery-slides">
+                    <img src="images/slider1.jpg">
+                </div>
+                <div class="gallery-slides">
+                    <img src="images/slider2.jpg">
+                </div>
+                <div class="gallery-slides">
+                    <img src="images/slider3.jpg">
+                </div>
+                <div class="gallery-slides">
+                    <img src="images/slider4.jpg">
+                </div>
+                <div class="gallery-slides">
+                    <img src="images/slider5.jpg">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <div class="gallery-indicators">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+            </div>
+
         </section>
     </main>
 
@@ -103,8 +218,132 @@
         <p>&copy; 2024 Золотая Середина. <a href="pages/privacy.html" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
 
-    
+        // Функция для перехода к следующему/предыдущему слайду
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Функция для перехода к конкретному слайду
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // Основная функция для отображения слайдов
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("gallery-slides");
+            let dots = document.getElementsByClassName("dot");
+
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");  // Убираем класс active у всех слайдов
+            }
+
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndex - 1].classList.add("active"); // Добавляем класс active к текущему слайду
+            dots[slideIndex - 1].className += " active"; // Подсвечиваем активную точку
+        }
+
+        // Автоматический переход слайдов через 5 секунд
+        setInterval(() => {
+            plusSlides(1);
+        }, 5000);
+
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userInfoElement = document.getElementById('user-info');
+            const loginForm = document.getElementById('login-form');
+
+            // Получение заголовков с токеном
+            const getHeadersWithToken = () => {
+                const token = localStorage.getItem('jwt');
+                return token ? { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+            };
+
+            // Проверка токена и получение информации о пользователе
+            const checkTokenAndFetchUser = async () => {
+                const headers = getHeadersWithToken();
+                if (headers.Authorization) {
+                    try {
+                        const response = await fetch('http://localhost:5047/api/auth/user', { headers });
+                        if (response.ok) {
+                            const data = await response.json();
+                            if (data && data.lastName && data.firstName) {
+                                userInfoElement.innerHTML = `
+                                        Добро пожаловать, ${data.lastName} ${data.firstName[0]}. <br>
+                                        <div style="text-align: right; margin-top: 30px; ">
+                                        <a href="pages/cart.html"><img src="images/cart.png" style="position: absolute; top: 55px; right: 150px; height: 70px; "/></a>
+                                        <button id="logout-button" class="button1">Выход</button>
+                                        </div>
+                                        `;
+                                loginForm.style.display = 'none';
+                                document.getElementById('logout-button').addEventListener('click', logout);
+                            }
+                        } else {
+                            localStorage.removeItem('jwt'); // Удаляем токен, если он больше недействителен
+                        }
+                    } catch {
+                        userInfoElement.innerHTML = 'Не удалось загрузить информацию о пользователе.';
+                    }
+                }
+            };
+
+            // Обработчик входа
+            document.getElementById('login-button').addEventListener('click', async () => {
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value.trim();
+
+                if (!email || !password) {
+                    alert("Заполните все поля!");
+                    return;
+                }
+
+                try {
+                    const response = await fetch('http://localhost:5047/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        console.error("Ошибка:", error);
+                        throw new Error(error.message || "Ошибка подключения");
+                    }
+
+                    const data = await response.json();
+                    localStorage.setItem('jwt', data.token);
+                    console.log("Успешный вход:", data);
+                    checkTokenAndFetchUser(); // Перезагружаем приветствие
+                } catch (error) {
+                    console.error("Ошибка запроса:", error);
+                    alert("Не удалось подключиться к серверу.");
+                }
+            });
+
+            // Обработчик выхода
+            const logout = () => {
+                localStorage.removeItem('jwt'); // Удаляем токен
+                userInfoElement.innerHTML = ''; // Сбрасываем приветствие
+                loginForm.style.display = 'block'; // Показываем форму входа
+            };
+
+            // Выполнение проверки токена при загрузке
+            checkTokenAndFetchUser();
+        });
+
+    </script>
 
 
 
