@@ -8,6 +8,7 @@
     <title>Туроператор Золотая Середина</title>
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <style>
+        
         /* Контейнер для галереи */
         .gallery-container {
             position: relative;
@@ -97,6 +98,42 @@
                 background-color: #103813;
             }
 
+        /* Контейнер для поля поиска */
+        .search-form {
+            position: relative; /* Для позиционирования результатов относительно формы */
+        }
+
+        /* Контейнер для результатов поиска */
+        #search-results {
+            display: none; /* Скрываем контейнер по умолчанию */
+            margin-top: 5px; /* Добавляем небольшой отступ сверху */
+            padding: 10px;
+            border: 1px solid #ccc; /* Граница вокруг списка результатов */
+            background-color: white;
+            position: absolute; /* Позиционируем относительно формы поиска */
+            width: 96.8%; /* Растягиваем контейнер по ширине */
+            max-height: 300px; /* Ограничиваем максимальную высоту */
+            overflow-y: auto; /* Добавляем прокрутку, если результатов много */
+            z-index: 100; /* Устанавливаем высокий z-index, чтобы результат был поверх других элементов */
+        }
+
+        /* Стили для списка результатов */
+        #results-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            #results-list li {
+                padding: 8px 10px;
+                cursor: pointer;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+                #results-list li:hover {
+                    background-color: #f5f5f5; /* Подсветка при наведении */
+                }
+
 
     </style>
 </head>
@@ -132,18 +169,23 @@
             <li><a href="pages/contacts.html">Контакты</a></li>
         </ul>
     </nav>
+    <div>
+        <!-- Поле поиска -->
+        <form class="search-form" onsubmit="highlightText(event)">
+            <input type="text" id="search-input" placeholder="Поиск по сайту" oninput="searchTours()" required>
+            <button type="submit" class="button">Поиск</button>
+        </form>
 
+        <!-- Блок для отображения результатов поиска -->
+        <div id="search-results" style="display: none;">
+            <ul id="results-list"></ul>
+        </div>
+    </div>
     <main>
         <aside class="sidebar">
             <a href="pages/buying.html">Как купить</a>
             <a href="pages/articles.html">Статьи</a>
             <a href="pages/feedback.html">Обратная связь</a>
-
-            <!-- Поле поиска -->
-            <form class="search-form" onsubmit="highlightText(event)">
-                <input type="text" id="search-input" placeholder="Поиск по сайту" required>
-                <button type="submit" class="button">Поиск</button>
-            </form>
 
         </aside>
 
@@ -185,19 +227,19 @@
             <div class="gallery-container">
 
                 <div class="gallery-slides">
-                    <img src="images/slider1.jpg">
+                    <a href="pages/tours/tour1.html"><img src="images/tour1.jpg"></a>
                 </div>
                 <div class="gallery-slides">
-                    <img src="images/slider2.jpg">
+                    <a href="pages/tours/tour2.html"><img src="images/tour2.jpeg"></a>
                 </div>
                 <div class="gallery-slides">
-                    <img src="images/slider3.jpg">
+                    <a href="pages/tours/tour3.html"><img src="images/tour3.jpg"></a>
                 </div>
                 <div class="gallery-slides">
-                    <img src="images/slider4.jpg">
+                    <a href="pages/tours/tour4.html"><img src="images/tour4.jpeg"></a>
                 </div>
                 <div class="gallery-slides">
-                    <img src="images/slider5.jpg">
+                    <a href="pages/tours/tour5.html"><img src="images/tour5.jpg"></a>
                 </div>
 
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -215,7 +257,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Золотая Середина. <a href="pages/privacy.html" style="color: white">Политика конфиденциальности</a></p>
+        <p>&copy; 2024 Золотая Середина. <a href="Политика обработки персональных данных.pdf" target="_blank" style="color: white">Политика конфиденциальности</a></p>
         <p>Свяжитесь с нами: 8 (495) 223-92-76</p>
     </footer>
     <script>
@@ -281,12 +323,12 @@
                             const data = await response.json();
                             if (data && data.lastName && data.firstName) {
                                 userInfoElement.innerHTML = `
-                                        Добро пожаловать, ${data.lastName} ${data.firstName[0]}. <br>
-                                        <div style="text-align: right; margin-top: 30px; ">
-                                        <a href="pages/cart.html"><img src="images/cart.png" style="position: absolute; top: 55px; right: 150px; height: 70px; "/></a>
-                                        <button id="logout-button" class="button1">Выход</button>
-                                        </div>
-                                        `;
+                                            Добро пожаловать, ${data.lastName} ${data.firstName[0]}. <br>
+                                            <div style="text-align: right; margin-top: 30px; ">
+                                            <a href="pages/cart.html"><img src="images/cart.png" style="position: absolute; top: 55px; right: 150px; height: 70px; "/></a>
+                                            <button id="logout-button" class="button1">Выход</button>
+                                            </div>
+                                            `;
                                 loginForm.style.display = 'none';
                                 document.getElementById('logout-button').addEventListener('click', logout);
                             }
@@ -345,7 +387,7 @@
 
     </script>
 
-
+    <script src="Scripts/Search.js" defer></script>
 
 </body>
 </html>
